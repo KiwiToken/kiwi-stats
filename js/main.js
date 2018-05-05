@@ -10,7 +10,6 @@ const version = "v0.0.10";
 
 log('KIWI Stats', version);
 el('#footerversion').innerHTML = version;
-el_safe('contractAddress'),innerHTML = _CONTRACT_ADDRESS;
 
 var stats_updated_count = 0;
 /* todo: move these into some kind of contract helper class */
@@ -21,6 +20,8 @@ const _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
 const _MINIMUM_TARGET = 2**16;
 const _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
 const _ZERO_BN = new Eth.BN(0, 10);
+
+el_safe('contractAddress'),innerHTML = _CONTRACT_ADDRESS;
 
 /* these globals are written to once the values are loaded, and used by the mining calculator */
 var current_diff_saved = 0;
