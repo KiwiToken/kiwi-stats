@@ -76,6 +76,7 @@ eth.coinbase().then((result) => {
 
  web3.version.getNetwork((err, netId) => {
    log("Network: ", netId);
+   var network = "unknown network";
   switch (netId) {
     case "1":
       console.log('This is mainnet')
@@ -95,6 +96,7 @@ eth.coinbase().then((result) => {
     default:
       console.log('This is an unknown network.')
   }
+  el_safe('#networkName').innerHTML = network;
 })
 
 
