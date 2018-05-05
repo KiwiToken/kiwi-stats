@@ -67,6 +67,7 @@ eth.coinbase().then((result) => {
 
 token.balanceOf('0xe9ace1e7ad2c506d2fb60fad481887fc39819714').then((result) => {
     el_safe('#kiwiCount').innerHTML = result;
+    console.log(result);
 }).catch((error) => {
    log(error)
 });
