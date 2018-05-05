@@ -667,7 +667,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
             //type: 'logarithmic',  /* hard to read */
             scaleLabel: {
               display: true,
-              labelString: 'Total Supply (0xBitcoin)',
+              labelString: 'Total Supply (KIWI)',
               fontColor: 'rgb(255, 152, 0)',
             },
             gridLines: {
