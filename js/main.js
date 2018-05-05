@@ -60,6 +60,14 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
 
 const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 
+eth.coinbase()
+.then((result) => {
+  console.log(result);
+})
+.catch((error) => {
+  // null
+});
+
 function goToURLAnchor() {
   /* kind of a hack, after charts are loaded move to correct anchor. For some
      reason the viewport is forced to the top when creating the charts */
