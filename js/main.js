@@ -80,7 +80,7 @@ web3.version.getNetwork((err, netId) => {
      _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
      _MINIMUM_TARGET = 2**16;
      _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
-
+     token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
      break
    case "4":
      network = "Rinkeby Test Network";
@@ -95,7 +95,7 @@ web3.version.getNetwork((err, netId) => {
  }
  el_safe('#networkName').innerHTML = network;
  el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
- token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
+
 })
 
 eth.coinbase().then((result) => {
