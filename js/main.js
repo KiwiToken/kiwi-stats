@@ -11,6 +11,7 @@ const version = "v0.0.10";
 el('#footerversion').innerHTML = version;
 
 var stats_updated_count = 0;
+var netId = 0; // the blockchain network id
 /* todo: move these into some kind of contract helper class */
 var _BLOCKS_PER_READJUSTMENT = 512;
 var _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
@@ -77,6 +78,7 @@ web3.version.getNetwork((err, netId) => {
      break
    default:
  }
+ networkId = netId;
  el_safe('#networkName').innerHTML = network;
 });
 
@@ -189,17 +191,13 @@ stats = [
   ['Epoch Count',                   token.epochCount,                     "",           1,          null     ], /* mining */
   ['Total Supply',                  token.totalSupply,                    "0xBTC",      0.00000001, null     ], /* supply */
   //['Mining Target',                 token.miningTarget,                   "",           1,          null     ], /* mining */
+if(netId == 1){
   ['',                              null,                                 "",           1,          null     ], /* */
   ['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
   ['Token Transfers',               null,                                 "transfers",  1,          null     ], /* usage */
   ['Total Contract Operations',     null,                                 "txs",        1,          null     ], /* usage */
-  //['',                              null,                                 "0xBTC",      0.00000001, null     ], /* */
-  //['TokenMiningPool.com Hashrate',  null,                                 "Mh/s",       1,          null     ], /* pool */
-  //['0xBrute.com Hashrate',          null,                                 "Mh/s",       1,          null     ], /* pool */
-  //['0xPool.io Hashrate',            null,                                 "Mh/s",       1,          null     ], /* pool */
-  //['gpu.PiZzA Hashrate',            null,                                 "Mh/s",       1,          null     ], /* pool */
-  //['0xBTCpool.com Hashrate',        null,                                 "Mh/s",       1,          null     ], /* pool */
-];
+}
+  ];
 
 var latest_eth_block = null;
 eth.blockNumber().then((value)=>{
