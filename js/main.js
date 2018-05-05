@@ -10,7 +10,7 @@ var saved_current_block_reward = 0;
 
 /* todo: move these into some kind of contract helper class */
 var _BLOCKS_PER_READJUSTMENT = 512;
-var contract_address = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
+var contract_address = "";
 var _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
 var _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
 var _MINIMUM_TARGET = 2**16;
