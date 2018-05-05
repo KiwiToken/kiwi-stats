@@ -8,7 +8,6 @@ function addToURL(value){
 
 const version = "v0.0.10";
 
-log('KIWI Stats', version);
 el('#footerversion').innerHTML = version;
 
 var stats_updated_count = 0;
@@ -54,7 +53,6 @@ var pool_colors = {
 
 if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !== 'undefined') {
    var eth = new Eth(window.web3.currentProvider);
-   log("connected to metamask");
 } else {
    var eth = new Eth(new Eth.HttpProvider("https://ropsten.infura.io/MnFOXCPE2oOhWpOCyEBT"));
    log("warning: no web3 provider found, using infura.io as backup provider")
@@ -70,38 +68,31 @@ eth.coinbase().then((result) => {
 
   //display Kiwi account owned by connected account
   token.balanceOf(result).then((balance) => {
-      log(balance);
       el_safe('#kiwiCount').innerHTML = (balance.balance / 100000000).toString(10);
   });
 
  }).catch((error) => {});
 
  web3.version.getNetwork((err, netId) => {
-   log("Network: ", netId);
    var network = "unknown network";
   switch (netId) {
     case "1":
       network = "Main Ethereum Network";
-      console.log('This is mainnet')
       break
     case "2":
       network = "Deprecated Morden Network";
-      console.log('This is the deprecated Morden test network.')
       break
     case "3":
       network = "Ropsten Test Network";
-      console.log('This is the ropsten test network.')
       break
     case "4":
       network = "Rinkeby Test Network";
-      console.log('This is the Rinkeby test network.')
       break
     case "42":
       network = "Kovan Test Network";
-      console.log('This is the Kovan test network.')
       break
     default:
-      console.log('This is an unknown network.')
+      network = "Unknown";
   }
   el_safe('#networkName').innerHTML = network;
 })
@@ -425,7 +416,7 @@ function updateThirdPartyAPIs() {
 }
 
 function showBlockDistributionPieChart(piechart_dataset, piechart_labels) {
-  //console.log('dataset', piechart_dataset);
+
   el('#blockdistributionpiechart').innerHTML = '<canvas id="chart-block-distribution" width="2rem" height="2rem"></canvas>';
 
   if(piechart_dataset.length == 0 || piechart_labels.length == 0) {
@@ -511,7 +502,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
 
   //var num_eth_blocks_to_search = hours_into_past * 60 * 60 / 15;
   var num_eth_blocks_to_search = last_reward_eth_block - last_difficulty_start_block;
-  log("searching last", num_eth_blocks_to_search, "blocks");
+  //log("searching last", num_eth_blocks_to_search, "blocks");
 
   /* get all mint() transactions in the last N blocks */
   /* more info: https://github.com/ethjs/ethjs/blob/master/docs/user-guide.md#ethgetlogs */
@@ -532,7 +523,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
     /* total number of blocks mined in this filter */
     var total_block_count = result.length;
 
-    log("got filter results:", total_block_count, "transactions");
+    //log("got filter results:", total_block_count, "transactions");
 
     result.forEach(function(transaction){
       function getMinerAddressFromTopic(address_from_topic) {
@@ -559,9 +550,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
       }
     });
 
-    log("processed blocks:",
-      Object.keys(miner_block_count).length,
-      "unique miners");
+    //log("processed blocks:",Object.keys(miner_block_count).length,"unique miners");
 
     /* we will eventually show newest blocks first, so reverse the list */
     mined_blocks.reverse();
@@ -597,7 +586,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
     /* descending */
     sorted_miner_block_count.sort((a, b) => {return b[1] - a[1];});
 
-    log('done sorting miner info');
+    //log('done sorting miner info');
 
     /* fill in miner info */
     var piechart_labels = [];
@@ -631,7 +620,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
       + toReadableHashrate(estimated_network_hashrate, false) + '</td></tr>';
       */
     el('#minerstats').innerHTML = innerhtml_buffer;
-    log('done populating miner stats');
+    //log('done populating miner stats');
     // $(window).hide().show(0);
     // $(window).trigger('resize');
 
@@ -672,7 +661,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
         //+ '</a></td></tr>';
     });
     el('#blockstats').innerHTML = innerhtml_buffer;
-    log('done populating block stats');
+    //log('done populating block stats');
 
     goToURLAnchor();
   })
