@@ -591,21 +591,16 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
 }
 
 function createStatsTable(){
-  var delayInMilliseconds = 1000; //1 second
-  setTimeout(function() {
+  stats.forEach(function(stat){
+    stat_name = stat[0]
+    stat_function = stat[1]
+    stat_unit = stat[2]
+    stat_multiplier = stat[3]
 
-    stats.forEach(function(stat){
-      stat_name = stat[0]
-      stat_function = stat[1]
-      stat_unit = stat[2]
-      stat_multiplier = stat[3]
-
-      el('#statistics').innerHTML += '<tr><td>'
-        + stat_name + '</td><td id="'
-        + stat_name.replace(/ /g,"") + '"></td></tr>';
-    });
-
-  }, delayInMilliseconds);
+    el('#statistics').innerHTML += '<tr><td>'
+      + stat_name + '</td><td id="'
+      + stat_name.replace(/ /g,"") + '"></td></tr>';
+  });
 }
 
 function areAllBlockchainStatsLoaded(stats) {
@@ -689,8 +684,15 @@ function loadAllStats() {
 }
 
 function updateAndDisplayAllStats() {
-  createStatsTable();
-  //loadAllStats();
+
+  var delayInMilliseconds = 1000; //1 second - hack to make sure vars are populated
+  setTimeout(function() {
+
+    createStatsTable();
+    loadAllStats();
+
+  }, delayInMilliseconds);
+
 }
 
 function goToURLAnchor() {
