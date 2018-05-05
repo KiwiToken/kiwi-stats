@@ -8,13 +8,13 @@ function addToURL(value){
 
 const version = "v0.0.10";
 
-log('0xBitcoin Stats', version);
+log('KIWI Stats', version);
 el('#footerversion').innerHTML = version;
 
 var stats_updated_count = 0;
 /* todo: move these into some kind of contract helper class */
 const _BLOCKS_PER_READJUSTMENT = 1024;
-const _CONTRACT_ADDRESS = "0xB6eD7644C69416d67B522e20bC294A9a9B405B31";
+const _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
 const _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
 const _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
 const _MINIMUM_TARGET = 2**16;
@@ -29,7 +29,10 @@ var saved_current_block_reward = 0;
 /* colors used by pool names. todo: move to css, still use them for chart.js */
 var pool_colors = {
   orange      : "#C64500",
-  purple      : "#4527A0", // note: purple looks a lot like blue
+
+/* colors below here are not assigned yet */
+
+  purple      : "#4527A0",
   blue        : "#0277BD",
   green       : "#2E7D32",
   yellow      : "#997500",
@@ -38,7 +41,6 @@ var pool_colors = {
   teal        : "#009688",
   red         : "#f44336",
 
-  /* colors below here are not assigned yet */
   pink        : "#e91e63",
   lightpurple : "#9c27b0",
   lime        : "#cddc39",
@@ -49,14 +51,12 @@ var pool_colors = {
 }
 
 /* TODO: figure out why it doesn't work w metamask */
-var eth = new Eth(new Eth.HttpProvider("https://mainnet.infura.io/MnFOXCPE2oOhWpOCyEBT"));
-// if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !== 'undefined') {
-//   var eth = new Eth(window.web3.currentProvider);
-// } else {
-//   var eth = new Eth(new Eth.HttpProvider("https://mainnet.infura.io/MnFOXCPE2oOhWpOCyEBT"));
-//   log("warning: no web3 provider found, using infura.io as backup provider")
-// }
-
+if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !== 'undefined') {
+   var eth = new Eth(window.web3.currentProvider);
+} else {
+   var eth = new Eth(new Eth.HttpProvider("https://ropsten.infura.io/MnFOXCPE2oOhWpOCyEBT"));
+   log("warning: no web3 provider found, using infura.io as backup provider")
+}
 
 const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 
@@ -84,7 +84,7 @@ function goToURLAnchor() {
 }
 
 
-function calculateNewMiningDifficulty(current_difficulty, 
+function calculateNewMiningDifficulty(current_difficulty,
                                       eth_blocks_since_last_difficulty_period,
                                       epochs_mined) {
   var current_mining_target = _MAXIMUM_TARGET_BN.div(new Eth.BN(current_difficulty));
@@ -102,7 +102,7 @@ function calculateNewMiningDifficulty(current_difficulty,
     var excess_block_pct = (target_eth_blocks_since_last_difficulty_period.mul(new Eth.BN(100))).div( eth_blocks_since_last_difficulty_period );
     var excess_block_pct_extra = excess_block_pct.sub(new Eth.BN(100));
     if (excess_block_pct_extra.gt(new Eth.BN(1000))) {
-      excess_block_pct_extra = new Eth.BN(1000); 
+      excess_block_pct_extra = new Eth.BN(1000);
     }
     // If there were 5% more blocks mined than expected then this is 5.  If there were 100% more blocks mined than expected then this is 100.
     //make it harder
@@ -422,7 +422,7 @@ function getMinerColor(address, known_miners) {
     //var address_url = 'https://etherscan.io/address/' + address;
     //var hexcolor = (simpleHash(7, address) & 0xFFFFFF) | 0x000000;
     hexcolor = 'hsl(' + (simpleHash(2, address) % 360) + ', 48%, 30%)';
-    
+
   }
   return hexcolor;
 }
@@ -454,21 +454,7 @@ function getMinerNameLinkHTML(address, known_miners) {
 function updateAllMinerInfo(eth, stats, hours_into_past){
 
   var known_miners = {
-    "0xf3243babf74ead828ac656877137df705868fd66" : [ "Token Mining Pool", "http://TokenMiningPool.com",     pool_colors.orange ],
-    "0x53ce57325c126145de454719b4931600a0bd6fc4" : [ "0xPool",            "http://0xPool.io",               pool_colors.purple ],
-    "0x98b155d9a42791ce475acc336ae348a72b2e8714" : [ "0xBTCpool",         "http://0xBTCpool.com",           pool_colors.blue ],
-    "0x363b5534fb8b5f615583c7329c9ca8ce6edaf6e6" : [ "mike.rs pool",      "http://mike.rs:3000",            pool_colors.green ],
-    "0x02c8832baf93380562b0c8ce18e2f709d6514c60" : [ "mike.rs pool B",    "http://b.mike.rs:3000",          pool_colors.green ],
-    "0x8dcee1c6302232c4cc5ce7b5ee8be16c1f9fd961" : [ "Mine0xBTC",         "http://mine0xbtc.eu",            pool_colors.darkpurple ],
-    "0x20744acca6966c0f45a80aa7baf778f4517351a4" : [ "PoolOfD32th",       "http://0xbtc.poolofd32th.club",  pool_colors.darkred ],
-    "0xd4ddfd51956c19f624e948abc8619e56e5dc3958" : [ "0xMiningPool",      "http://0xminingpool.com/",       pool_colors.teal ],
-    "0x88c2952c9e9c56e8402d1b6ce6ab986747336b30" : [ "0xbtc.wolfpool.io", "http://wolfpool.io/",            pool_colors.red ],
-    "0x6917035f1deecc51fa475be4a2dc5528b92fd6b0" : [ "PiZzA pool",        "http://gpu.PiZzA",               pool_colors.yellow ],
-    "0x693d59285fefbd6e7be1b87be959eade2a4bf099" : [ "PiZzA pool",        "http://gpu.PiZzA",               pool_colors.yellow ],
-    "0x697f698dd492d71734bcaec77fd5065fa7a95a63" : [ "PiZzA pool",        "http://gpu.PiZzA",               pool_colors.yellow ],
-    "0x69ebd94944f0dba3e9416c609fbbe437b45d91ab" : [ "PiZzA pool",        "http://gpu.PiZzA",               pool_colors.yellow ],
-    "0x69b85604799d16d938835852e497866a7b280323" : [ "PiZzA pool",        "http://gpu.PiZzA",               pool_colors.yellow ],
-    "0x69ded73bd88a72bd9d9ddfce228eadd05601edd7" : [ "PiZzA pool",        "http://gpu.PiZzA",               pool_colors.yellow ],
+    "0xE984a8783dDFf96B87c377B1191CC6b45A8fDc27" : [ "KIWI Mining Pool", "http://thekiwi.info",     pool_colors.orange ],
   }
 
   var last_reward_eth_block = getValueFromStats('Last Eth Reward Block', stats)
@@ -486,7 +472,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
   eth.getLogs({
     fromBlock: last_reward_eth_block - num_eth_blocks_to_search,
     toBlock: last_reward_eth_block,
-    address: '0xB6eD7644C69416d67B522e20bC294A9a9B405B31',
+    address: '0xE984a8783dDFf96B87c377B1191CC6b45A8fDc27',
     topics: ['0xcf6fbb9dcea7d07263ab4f5c3a92f53af33dffc421d9d121e1c74b307e68189d', null],
   })
   .then((result) => {
@@ -745,5 +731,3 @@ function updateAndDisplayAllStats() {
   createStatsTable();
   loadAllStats();
 }
-
-
