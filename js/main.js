@@ -10,7 +10,7 @@ var saved_current_block_reward = 0;
 
 /* todo: move these into some kind of contract helper class */
 var _BLOCKS_PER_READJUSTMENT = 512;
-var _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
+var contract_address = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
 var _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
 var _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
 var _MINIMUM_TARGET = 2**16;
@@ -65,7 +65,7 @@ web3.version.getNetwork((err, netId) => {
      break
    case "3":
      network = "Ropsten Test Network";
-     _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE22";
+     contract_address = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE22";
      break
    case "4":
      network = "Rinkeby Test Network";
@@ -76,12 +76,12 @@ web3.version.getNetwork((err, netId) => {
    default:
  }
  networkId = netId;
- token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
+ token = eth.contract(tokenABI).at(contract_address);
  el_safe('#networkName').innerHTML = network;
 });
 
 
-el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
+el_safe('#contractAddress').innerHTML = contract_address;
 
 
 eth.coinbase().then((result) => {
