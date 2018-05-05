@@ -69,7 +69,7 @@ eth.coinbase().then((result) => {
   //display Kiwi account owned by connected account
   token.balanceOf(result).then((balance) => {
       log(balance);
-      el_safe('#kiwiCount').innerHTML = balance.balance.toString(10);
+      el_safe('#kiwiCount').innerHTML = (balance.balance / 100000000).toString(10);
   });
 
  }).catch((error) => {});
@@ -365,9 +365,9 @@ function updateStatsThatHaveDependencies(stats) {
   }
   /* estimated hashrate */
   //difficulty = getValueFromStats('Mining Difficulty', stats)
-  hashrate = difficulty * 2**22 / 600
+  hashrate = difficulty * 2**22 / 120
   /* use current reward rate in hashrate calculation */
-  hashrate *= (10 / minutes_per_reward)
+  hashrate *= (2 / minutes_per_reward)
   setValueInStats('Estimated Hashrate', hashrate, stats);
   el_safe('#EstimatedHashrate').innerHTML = toReadableHashrate(hashrate, true);
 }
