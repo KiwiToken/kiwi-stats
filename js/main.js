@@ -1,6 +1,6 @@
 const version = "v0.0.10";
 
-var stats = "";
+var stats = [];
 var stats_updated_count = 0;
 var netId = 0; // the blockchain network id
 
