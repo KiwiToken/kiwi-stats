@@ -486,7 +486,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
   eth.getLogs({
     fromBlock: last_reward_eth_block - num_eth_blocks_to_search,
     toBlock: last_reward_eth_block,
-    address: '0xe984a8783ddff96b87c377b1191cc6b45a8fdc27',
+    address: '0x43c6017adbc11d00e35ec6a6c496071e150dd2ce',
     topics: ['0xcf6fbb9dcea7d07263ab4f5c3a92f53af33dffc421d9d121e1c74b307e68189d', null],
   })
   .then((result) => {
