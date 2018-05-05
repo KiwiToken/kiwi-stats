@@ -461,7 +461,7 @@ function getMinerNameLinkHTML(address, known_miners) {
 function updateAllMinerInfo(eth, stats, hours_into_past){
 
   var known_miners = {
-    "0xE984a8783dDFf96B87c377B1191CC6b45A8fDc27" : [ "KIWI Mining Pool", "http://thekiwi.info",     pool_colors.orange ],
+    "0xe984a8783ddff96b87c377b1191cc6b45a8fdc27" : [ "KIWI Mining Pool", "http://thekiwi.info",     pool_colors.orange ],
   }
 
   var last_reward_eth_block = getValueFromStats('Last Eth Reward Block', stats)
@@ -479,7 +479,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
   eth.getLogs({
     fromBlock: last_reward_eth_block - num_eth_blocks_to_search,
     toBlock: last_reward_eth_block,
-    address: '0xE984a8783dDFf96B87c377B1191CC6b45A8fDc27',
+    address: '0xe984a8783ddff96b87c377b1191cc6b45a8fdc27',
     topics: ['0xcf6fbb9dcea7d07263ab4f5c3a92f53af33dffc421d9d121e1c74b307e68189d', null],
   })
   .then((result) => {
