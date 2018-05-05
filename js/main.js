@@ -1,29 +1,3 @@
-function wait(ms){
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
-}
-
-const version = "v0.0.10";
-var stats_updated_count = 0;
-
-/* these globals are written to once we know what network we are on */
-var _BLOCKS_PER_READJUSTMENT = "";
-var _CONTRACT_ADDRESS = "";
-var _MAXIMUM_TARGET_STR = "";
-var _MAXIMUM_TARGET_BN = "";
-var _MINIMUM_TARGET = "";
-var _MINIMUM_TARGET_BN = "";
-var token = "";
-
-const _ZERO_BN = new Eth.BN(0, 10);
-
-/* these globals are written to once the values are loaded, and used by the mining calculator */
-var current_diff_saved = 0;
-var next_diff_saved = 0;
-var saved_current_block_reward = 0;
 
 function addToURL(value){
   if (history.pushState) {
@@ -32,7 +6,27 @@ function addToURL(value){
   }
 }
 
+const version = "v0.0.10";
+
+log('KIWI Stats', version);
 el('#footerversion').innerHTML = version;
+
+var stats_updated_count = 0;
+/* todo: move these into some kind of contract helper class */
+const _BLOCKS_PER_READJUSTMENT = 512;
+const _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
+const _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
+const _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
+const _MINIMUM_TARGET = 2**16;
+const _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
+const _ZERO_BN = new Eth.BN(0, 10);
+
+el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
+
+/* these globals are written to once the values are loaded, and used by the mining calculator */
+var current_diff_saved = 0;
+var next_diff_saved = 0;
+var saved_current_block_reward = 0;
 
 /* colors used by pool names. todo: move to css, still use them for chart.js */
 var pool_colors = {
@@ -66,48 +60,8 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
    log("warning: no web3 provider found, using infura.io as backup provider")
 }
 
-web3.version.getNetwork((err, netId) => {
-  log("Network: ", netId);
-  var network = "unknown network";
- switch (netId) {
-   case "1":
-     network = "Main Ethereum Network";
-     console.log('This is mainnet')
-     break
-   case "2":
-     network = "Deprecated Morden Network";
-     console.log('This is the deprecated Morden test network.')
-     break
-   case "3":
-     network = "Ropsten Test Network!!";
-     console.log('This is the ropsten test network.');
+const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 
-     _BLOCKS_PER_READJUSTMENT = 512;
-     _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
-     _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
-     _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
-     _MINIMUM_TARGET = 2**16;
-     _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
-     token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
-     break
-   case "4":
-     network = "Rinkeby Test Network";
-     console.log('This is the Rinkeby test network.')
-     break
-   case "42":
-     network = "Kovan Test Network";
-     console.log('This is the Kovan test network.')
-     break
-   default:
-     console.log('This is an unknown network.')
- }
- el_safe('#networkName').innerHTML = network;
- el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
-
-})
-
-/* woah hacky boy - this is just to make sure that variables are set before continuting */
-wait(3000);
 
 eth.coinbase().then((result) => {
 
@@ -121,6 +75,36 @@ eth.coinbase().then((result) => {
   });
 
  }).catch((error) => {});
+
+ web3.version.getNetwork((err, netId) => {
+   log("Network: ", netId);
+   var network = "unknown network";
+  switch (netId) {
+    case "1":
+      network = "Main Ethereum Network";
+      console.log('This is mainnet')
+      break
+    case "2":
+      network = "Deprecated Morden Network";
+      console.log('This is the deprecated Morden test network.')
+      break
+    case "3":
+      network = "Ropsten Test Network";
+      console.log('This is the ropsten test network.')
+      break
+    case "4":
+      network = "Rinkeby Test Network";
+      console.log('This is the Rinkeby test network.')
+      break
+    case "42":
+      network = "Kovan Test Network";
+      console.log('This is the Kovan test network.')
+      break
+    default:
+      console.log('This is an unknown network.')
+  }
+  el_safe('#networkName').innerHTML = network;
+})
 
 
 function goToURLAnchor() {
