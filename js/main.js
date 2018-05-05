@@ -18,14 +18,6 @@ var _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
 var _ZERO_BN = new Eth.BN(0, 10);
 var token = "";
 
-
-function addToURL(value){
-  if (history.pushState) {
-    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + value;
-    window.history.pushState({path:newurl},'',newurl);
-  }
-}
-
 el('#footerversion').innerHTML = version;
 
 /* colors used by pool names. todo: move to css, still use them for chart.js */
@@ -95,79 +87,7 @@ web3.version.getNetwork((err, netId) => {
 });
 
 
-function goToURLAnchor() {
-  /* kind of a hack, after charts are loaded move to correct anchor. For some
-     reason the viewport is forced to the top when creating the charts */
-  if (window.location.hash.search('#difficulty') != -1) {
-    // this one isn't really necessary because diffigulty graph is at top of screen
-    //var targetOffset = $('#row-difficulty').offset().top;
-    //$('html, body').animate({scrollTop: targetOffset}, 500);
-  } else if (window.location.hash.search('#reward-time') != -1) {
-    var targetOffset = $('#row-reward-time').offset().top;
-    $('html, body').animate({scrollTop: targetOffset}, 500);
-  }else if (window.location.hash.search('#miners') != -1) {
-    var targetOffset = $('#row-miners').offset().top;
-    $('html, body').animate({scrollTop: targetOffset}, 500);
-  }else if (window.location.hash.search('#blocks') != -1) {
-    var targetOffset = $('#row-blocks').offset().top;
-    $('html, body').animate({scrollTop: targetOffset}, 500);
-  }else if (window.location.hash.search('#miningcalculator') != -1) {
-    // not necessary; calc is at top of screen
-    //var targetOffset = $('#row-miningcalculator').offset().top;
-    //$('html, body').animate({scrollTop: targetOffset}, 500);
-  }
-}
 
-
-function calculateNewMiningDifficulty(current_difficulty,
-                                      eth_blocks_since_last_difficulty_period,
-                                      epochs_mined) {
-  var current_mining_target = _MAXIMUM_TARGET_BN.div(new Eth.BN(current_difficulty));
-  var eth_blocks_since_last_difficulty_period = new Eth.BN(eth_blocks_since_last_difficulty_period);
-  var epochs_mined = new Eth.BN(epochs_mined);
-
-  var target_eth_blocks_since_last_difficulty_period = epochs_mined.mul(new Eth.BN(60));
-
-  if (target_eth_blocks_since_last_difficulty_period == 0) {
-    return 0;
-  }
-
-  if(eth_blocks_since_last_difficulty_period.lt(target_eth_blocks_since_last_difficulty_period)) {
-    //console.log('harder');
-    var excess_block_pct = (target_eth_blocks_since_last_difficulty_period.mul(new Eth.BN(100))).div( eth_blocks_since_last_difficulty_period );
-    var excess_block_pct_extra = excess_block_pct.sub(new Eth.BN(100));
-    if (excess_block_pct_extra.gt(new Eth.BN(1000))) {
-      excess_block_pct_extra = new Eth.BN(1000);
-    }
-    // If there were 5% more blocks mined than expected then this is 5.  If there were 100% more blocks mined than expected then this is 100.
-    //make it harder
-    var new_mining_target = current_mining_target.sub(current_mining_target.div(new Eth.BN(2000)).mul(excess_block_pct_extra));   //by up to 50 %
-  }else{
-    //console.log('easier');
-    var shortage_block_pct = (eth_blocks_since_last_difficulty_period.mul(new Eth.BN(100))).div( target_eth_blocks_since_last_difficulty_period );
-    var shortage_block_pct_extra = shortage_block_pct.sub(new Eth.BN(100));
-    if (shortage_block_pct_extra.gt(new Eth.BN(1000))) {
-      shortage_block_pct_extra = new Eth.BN(1000); //always between 0 and 1000
-    }
-    //make it easier
-    var new_mining_target = current_mining_target.add(current_mining_target.div(new Eth.BN(2000)).mul(shortage_block_pct_extra));   //by up to 50 %
-  }
-
-  /* never gunna happen, probably. */
-  if(new_mining_target.lt(_MINIMUM_TARGET_BN)) //very difficult
-  {
-    //console.log('hit minimum');
-    new_mining_target = _MINIMUM_TARGET_BN;
-  }
-  if(new_mining_target.gt(_MAXIMUM_TARGET_BN)) //very easy
-  {
-    //console.log('hit maximum');
-    new_mining_target = _MAXIMUM_TARGET_BN;
-  }
-
-  /* return difficulty as an integer */
-  return parseInt(_MAXIMUM_TARGET_BN.div(new_mining_target).toString(10));
-}
 
 /* move fetching/storing stats into a class, even just to wrap it */
 stats = [
@@ -765,4 +685,85 @@ function loadAllStats() {
 function updateAndDisplayAllStats() {
   createStatsTable();
   loadAllStats();
+}
+
+function goToURLAnchor() {
+  /* kind of a hack, after charts are loaded move to correct anchor. For some
+     reason the viewport is forced to the top when creating the charts */
+  if (window.location.hash.search('#difficulty') != -1) {
+    // this one isn't really necessary because diffigulty graph is at top of screen
+    //var targetOffset = $('#row-difficulty').offset().top;
+    //$('html, body').animate({scrollTop: targetOffset}, 500);
+  } else if (window.location.hash.search('#reward-time') != -1) {
+    var targetOffset = $('#row-reward-time').offset().top;
+    $('html, body').animate({scrollTop: targetOffset}, 500);
+  }else if (window.location.hash.search('#miners') != -1) {
+    var targetOffset = $('#row-miners').offset().top;
+    $('html, body').animate({scrollTop: targetOffset}, 500);
+  }else if (window.location.hash.search('#blocks') != -1) {
+    var targetOffset = $('#row-blocks').offset().top;
+    $('html, body').animate({scrollTop: targetOffset}, 500);
+  }else if (window.location.hash.search('#miningcalculator') != -1) {
+    // not necessary; calc is at top of screen
+    //var targetOffset = $('#row-miningcalculator').offset().top;
+    //$('html, body').animate({scrollTop: targetOffset}, 500);
+  }
+}
+
+
+function calculateNewMiningDifficulty(current_difficulty,
+                                      eth_blocks_since_last_difficulty_period,
+                                      epochs_mined) {
+  var current_mining_target = _MAXIMUM_TARGET_BN.div(new Eth.BN(current_difficulty));
+  var eth_blocks_since_last_difficulty_period = new Eth.BN(eth_blocks_since_last_difficulty_period);
+  var epochs_mined = new Eth.BN(epochs_mined);
+
+  var target_eth_blocks_since_last_difficulty_period = epochs_mined.mul(new Eth.BN(60));
+
+  if (target_eth_blocks_since_last_difficulty_period == 0) {
+    return 0;
+  }
+
+  if(eth_blocks_since_last_difficulty_period.lt(target_eth_blocks_since_last_difficulty_period)) {
+    //console.log('harder');
+    var excess_block_pct = (target_eth_blocks_since_last_difficulty_period.mul(new Eth.BN(100))).div( eth_blocks_since_last_difficulty_period );
+    var excess_block_pct_extra = excess_block_pct.sub(new Eth.BN(100));
+    if (excess_block_pct_extra.gt(new Eth.BN(1000))) {
+      excess_block_pct_extra = new Eth.BN(1000);
+    }
+    // If there were 5% more blocks mined than expected then this is 5.  If there were 100% more blocks mined than expected then this is 100.
+    //make it harder
+    var new_mining_target = current_mining_target.sub(current_mining_target.div(new Eth.BN(2000)).mul(excess_block_pct_extra));   //by up to 50 %
+  }else{
+    //console.log('easier');
+    var shortage_block_pct = (eth_blocks_since_last_difficulty_period.mul(new Eth.BN(100))).div( target_eth_blocks_since_last_difficulty_period );
+    var shortage_block_pct_extra = shortage_block_pct.sub(new Eth.BN(100));
+    if (shortage_block_pct_extra.gt(new Eth.BN(1000))) {
+      shortage_block_pct_extra = new Eth.BN(1000); //always between 0 and 1000
+    }
+    //make it easier
+    var new_mining_target = current_mining_target.add(current_mining_target.div(new Eth.BN(2000)).mul(shortage_block_pct_extra));   //by up to 50 %
+  }
+
+  /* never gunna happen, probably. */
+  if(new_mining_target.lt(_MINIMUM_TARGET_BN)) //very difficult
+  {
+    //console.log('hit minimum');
+    new_mining_target = _MINIMUM_TARGET_BN;
+  }
+  if(new_mining_target.gt(_MAXIMUM_TARGET_BN)) //very easy
+  {
+    //console.log('hit maximum');
+    new_mining_target = _MAXIMUM_TARGET_BN;
+  }
+
+  /* return difficulty as an integer */
+  return parseInt(_MAXIMUM_TARGET_BN.div(new_mining_target).toString(10));
+}
+
+function addToURL(value){
+  if (history.pushState) {
+    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + value;
+    window.history.pushState({path:newurl},'',newurl);
+  }
 }
