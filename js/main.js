@@ -191,13 +191,16 @@ stats = [
   ['Epoch Count',                   token.epochCount,                     "",           1,          null     ], /* mining */
   ['Total Supply',                  token.totalSupply,                    "0xBTC",      0.00000001, null     ], /* supply */
   //['Mining Target',                 token.miningTarget,                   "",           1,          null     ], /* mining */
-if(netId == 1){
-  ['',                              null,                                 "",           1,          null     ], /* */
-  ['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
-  ['Token Transfers',               null,                                 "transfers",  1,          null     ], /* usage */
-  ['Total Contract Operations',     null,                                 "txs",        1,          null     ], /* usage */
-}
   ];
+
+  if(netId == 1){
+    stats.concat(
+    ['',                              null,                                 "",           1,          null     ], /* */
+    ['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
+    ['Token Transfers',               null,                                 "transfers",  1,          null     ], /* usage */
+    ['Total Contract Operations',     null,                                 "txs",        1,          null     ], /* usage */
+  );
+  }
 
 var latest_eth_block = null;
 eth.blockNumber().then((value)=>{
