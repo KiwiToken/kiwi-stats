@@ -263,8 +263,10 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
       }
 
       //console.log('diff chg @', difficulty_change_block_num);
+      if(y) {
+          var difficulty = difficulty_data[difficulty_data_index].y.toNumber();
+      }
 
-      var difficulty = difficulty_data[difficulty_data_index].y.toNumber();
 
       /* if difficulty change occurs within this step window */
       if (step != 0
