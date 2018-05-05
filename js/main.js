@@ -69,7 +69,7 @@ eth.coinbase().then((result) => {
   //display Kiwi account owned by connected account
   token.balanceOf(result).then((balance) => {
       log(balance);
-      el_safe('#kiwiCount').innerHTML = balance.toString(10);
+      el_safe('#kiwiCount').innerHTML = balance.balance.toString(10);
   });
 
  }).catch((error) => {});
