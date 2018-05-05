@@ -94,10 +94,8 @@ web3.version.getNetwork((err, netId) => {
  }
  el_safe('#networkName').innerHTML = network;
  el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
+ const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 })
-
-const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
-
 
 eth.coinbase().then((result) => {
 
