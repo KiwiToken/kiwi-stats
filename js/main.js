@@ -96,15 +96,15 @@ web3.version.getNetwork((err, netId) => {
    ['Rewards Until Readjustment',    null,                                 "",           1,          null     ], /* mining difficulty */
    ['Current Average Reward Time',   null,                                 "minutes",    1,          null     ], /* mining difficulty */
    ['Last Difficulty Start Block',   token.latestDifficultyPeriodStarted,  "",           1,          null     ], /* mining difficulty */
-   ['Tokens Minted',                 token.tokensMinted,                   "0xBTC",      0.00000001, null     ], /* supply */
-   ['Max Supply for Current Era',    token.maxSupplyForEra,                "0xBTC",      0.00000001, null     ], /* mining */
-   ['Supply Remaining in Era',       null,                                 "0xBTC",      0.00000001, null     ], /* mining */
+   ['Tokens Minted',                 token.tokensMinted,                   "KIWI",      0.00000001, null     ], /* supply */
+   ['Max Supply for Current Era',    token.maxSupplyForEra,                "KIWI",      0.00000001, null     ], /* mining */
+   ['Supply Remaining in Era',       null,                                 "KIWI",      0.00000001, null     ], /* mining */
    ['Last Eth Reward Block',         token.lastRewardEthBlockNumber,       "",           1,          null     ], /* mining */
    ['Last Eth Block',                eth.blockNumber,                      "",           1,          null     ], /* mining */
    ['Current Reward Era',            token.rewardEra,                      "/ 39",       1,          null     ], /* mining */
-   ['Current Mining Reward',         token.getMiningReward,                "0xBTC",      0.00000001, null     ], /* mining */
+   ['Current Mining Reward',         token.getMiningReward,                "KIWI",      0.00000001, null     ], /* mining */
    ['Epoch Count',                   token.epochCount,                     "",           1,          null     ], /* mining */
-   ['Total Supply',                  token.totalSupply,                    "0xBTC",      0.00000001, null     ], /* supply */
+   ['Total Supply',                  token.totalSupply,                    "KIWI",      0.00000001, null     ], /* supply */
    //['Mining Target',                 token.miningTarget,                   "",           1,          null     ], /* mining */
    ];
 
@@ -266,7 +266,7 @@ function updateStatsThatHaveDependencies(stats) {
   }
   supply_remaining_in_era = max_supply_for_era - current_supply; /* TODO: probably need to round to current mining reward */
   rewards_blocks_remaining_in_era = supply_remaining_in_era / current_reward;
-  el_safe('#SupplyRemaininginEra').innerHTML = "<b>" + supply_remaining_in_era.toLocaleString() + "</b> 0xBTC <span style='font-size:0.8em;'>(" + rewards_blocks_remaining_in_era + " blocks)</span>";
+  el_safe('#SupplyRemaininginEra').innerHTML = "<b>" + supply_remaining_in_era.toLocaleString() + "</b> KIWI <span style='font-size:0.8em;'>(" + rewards_blocks_remaining_in_era + " blocks)</span>";
 
   /* time until next epoch ('halvening') */
   el_safe('#CurrentRewardEra').innerHTML += " <span style='font-size:0.8em;'>(next era: ~" + secondsToReadableTime(rewards_blocks_remaining_in_era * 600) + ")</div>";
