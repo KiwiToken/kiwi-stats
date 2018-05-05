@@ -62,8 +62,15 @@ const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 
 
 eth.coinbase().then((result) => {
-  el_safe('#coinbaseAccount').innerHTML = result;             // display connected account
-  el_safe('#kiwiCount').innerHTML = token.balanceOf(result).balance.toString();   //display Kiwi account owned by connected account
+
+  // display connected account
+  el_safe('#coinbaseAccount').innerHTML = result;
+
+  //display Kiwi account owned by connected account
+  token.balanceOf(result).then((balance) => {
+      el_safe('#kiwiCount').innerHTML = balance.toString();
+  });
+
  }).catch((error) => {});
 
 
