@@ -306,7 +306,11 @@ function updateStatsThatHaveDependencies(stats) {
   }
   /* estimated hashrate */
   //difficulty = getValueFromStats('Mining Difficulty', stats)
+
   hashrate = difficulty * 2**22 / 120
+  if(difficulty < 1000) {
+      hashrate *= hashrate;
+  }
   /* use current reward rate in hashrate calculation */
   hashrate *= (2 / minutes_per_reward)
   setValueInStats('Estimated Hashrate', hashrate, stats);
