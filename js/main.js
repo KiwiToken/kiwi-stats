@@ -2,12 +2,12 @@ const version = "v0.0.10";
 var stats_updated_count = 0;
 
 /* these globals are written to once we know what network we are on */
-var _BLOCKS_PER_READJUSTMENT;
-var _CONTRACT_ADDRESS;
-var _MAXIMUM_TARGET_STR;
-var _MAXIMUM_TARGET_BN;
-var _MINIMUM_TARGET;
-var _MINIMUM_TARGET_BN;
+var _BLOCKS_PER_READJUSTMENT = "";
+var _CONTRACT_ADDRESS = "";
+var _MAXIMUM_TARGET_STR = "";
+var _MAXIMUM_TARGET_BN = "";
+var _MINIMUM_TARGET = "";
+var _MINIMUM_TARGET_BN = "";
 
 const _ZERO_BN = new Eth.BN(0, 10);
 
