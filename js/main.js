@@ -12,13 +12,13 @@ el('#footerversion').innerHTML = version;
 
 var stats_updated_count = 0;
 /* todo: move these into some kind of contract helper class */
-const _BLOCKS_PER_READJUSTMENT = 512;
-const _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
-const _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
-const _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
-const _MINIMUM_TARGET = 2**16;
-const _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
-const _ZERO_BN = new Eth.BN(0, 10);
+var _BLOCKS_PER_READJUSTMENT = 512;
+var _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
+var _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
+var _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
+var _MINIMUM_TARGET = 2**16;
+var _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
+var _ZERO_BN = new Eth.BN(0, 10);
 
 el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
 
@@ -41,7 +41,6 @@ var pool_colors = {
   darkred     : "hsl(356, 48%, 30%)",
   teal        : "#009688",
   red         : "#f44336",
-
   pink        : "#e91e63",
   lightpurple : "#9c27b0",
   lime        : "#cddc39",
@@ -58,6 +57,29 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
    log("warning: no web3 provider found, using infura.io as backup provider")
 }
 
+web3.version.getNetwork((err, netId) => {
+  var network = "Unknown Network";
+ switch (netId) {
+   case "1":
+     network = "Main Ethereum Network";
+     break
+   case "2":
+     network = "Deprecated Morden Network";
+     break
+   case "3":
+     network = "Ropsten Test Network";
+     break
+   case "4":
+     network = "Rinkeby Test Network";
+     break
+   case "42":
+     network = "Kovan Test Network";
+     break
+   default:
+ }
+ el_safe('#networkName').innerHTML = network;
+});
+
 const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 
 
@@ -72,30 +94,6 @@ eth.coinbase().then((result) => {
   });
 
  }).catch((error) => {});
-
- web3.version.getNetwork((err, netId) => {
-   var network = "unknown network";
-  switch (netId) {
-    case "1":
-      network = "Main Ethereum Network";
-      break
-    case "2":
-      network = "Deprecated Morden Network";
-      break
-    case "3":
-      network = "Ropsten Test Network";
-      break
-    case "4":
-      network = "Rinkeby Test Network";
-      break
-    case "42":
-      network = "Kovan Test Network";
-      break
-    default:
-      network = "Unknown";
-  }
-  el_safe('#networkName').innerHTML = network;
-})
 
 
 function goToURLAnchor() {
