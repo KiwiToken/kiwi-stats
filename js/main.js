@@ -1,6 +1,16 @@
 const version = "v0.0.10";
 var stats_updated_count = 0;
 
+/* these globals are written to once we know what network we are on */
+var _BLOCKS_PER_READJUSTMENT;
+var _CONTRACT_ADDRESS;
+var _MAXIMUM_TARGET_STR;
+var _MAXIMUM_TARGET_BN;
+var _MINIMUM_TARGET;
+var _MINIMUM_TARGET_BN;
+
+const _ZERO_BN = new Eth.BN(0, 10);
+
 /* these globals are written to once the values are loaded, and used by the mining calculator */
 var current_diff_saved = 0;
 var next_diff_saved = 0;
@@ -63,13 +73,12 @@ web3.version.getNetwork((err, netId) => {
      network = "Ropsten Test Network!!";
      console.log('This is the ropsten test network.');
 
-     const _BLOCKS_PER_READJUSTMENT = 512;
-     const _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
-     const _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
-     const _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
-     const _MINIMUM_TARGET = 2**16;
-     const _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
-     const _ZERO_BN = new Eth.BN(0, 10);
+     _BLOCKS_PER_READJUSTMENT = 512;
+     _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
+     _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
+     _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
+     _MINIMUM_TARGET = 2**16;
+     _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
 
      break
    case "4":
