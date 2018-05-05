@@ -591,6 +591,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
 }
 
 function createStatsTable(){
+  console.log(stats);
   stats.forEach(function(stat){
     stat_name = stat[0]
     stat_function = stat[1]
