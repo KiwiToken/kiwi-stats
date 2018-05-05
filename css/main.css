@@ -1,15 +1,3 @@
-/*
-td {
-  border: 1px solid black;
-}
-td > div {
-  width: 30px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-*/
-
 img.top-logo {
   float: left;
   margin: 1.09em 0.67em 0 0;
@@ -91,7 +79,7 @@ div {
 */
 
 /* mining calculator */
-input#hashrateField, 
+input#hashrateField,
 input#poolFeeField,
 input#mintFailureRateField {
   width:10rem;
@@ -133,3 +121,7 @@ fmath {
 .poolcolor-green  { color: #CCFF90 }
 .poolcolor-yellow { color: #FFEE58 }
 
+
+h6 {
+  margin-bottom: 0;
+}
