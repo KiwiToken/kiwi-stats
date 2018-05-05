@@ -1,6 +1,7 @@
 web3.version.getNetwork((err, netId) => {
   log("Network: ", netId);
   var network = "unknown network";
+  var contractName = "main";
  switch (netId) {
    case "1":
      network = "Main Ethereum Network";
@@ -12,7 +13,9 @@ web3.version.getNetwork((err, netId) => {
      break
    case "3":
      network = "Ropsten Test Network!!";
-     console.log('This is the ropsten test network.')
+     contractName = "ropsten";
+     console.log('This is the ropsten test network.');
+
      break
    case "4":
      network = "Rinkeby Test Network";
@@ -24,6 +27,9 @@ web3.version.getNetwork((err, netId) => {
      break
    default:
      console.log('This is an unknown network.')
+ }
+ $.getScript("contracts/ropsten.js"), function() {
+   console.log("Loaded Contract Info");
  }
  el_safe('#networkName').innerHTML = network;
 })

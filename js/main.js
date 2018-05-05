@@ -50,7 +50,6 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
 
 const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 
-
 eth.coinbase().then((result) => {
 
   // display connected account
