@@ -77,7 +77,7 @@ web3.version.getNetwork((err, netId) => {
    default:
      console.log('This is an unknown network.')
  }
- $.getScript("contracts/ropsten.js"), function() {
+ await $.getScript("contracts/ropsten.js"), function() {
    console.log("Loaded Contract Info");
  }
  el_safe('#networkName').innerHTML = network;
