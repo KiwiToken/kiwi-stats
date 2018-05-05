@@ -13,7 +13,7 @@ el('#footerversion').innerHTML = version;
 
 var stats_updated_count = 0;
 /* todo: move these into some kind of contract helper class */
-const _BLOCKS_PER_READJUSTMENT = 1024;
+const _BLOCKS_PER_READJUSTMENT = 512;
 const _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
 const _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
 const _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
@@ -50,9 +50,9 @@ var pool_colors = {
 
 }
 
-/* TODO: figure out why it doesn't work w metamask */
 if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !== 'undefined') {
    var eth = new Eth(window.web3.currentProvider);
+   log("connected to metamask");
 } else {
    var eth = new Eth(new Eth.HttpProvider("https://ropsten.infura.io/MnFOXCPE2oOhWpOCyEBT"));
    log("warning: no web3 provider found, using infura.io as backup provider")
