@@ -48,6 +48,42 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
    log("warning: no web3 provider found, using infura.io as backup provider")
 }
 
+web3.version.getNetwork((err, netId) => {
+  log("Network: ", netId);
+  var network = "unknown network";
+  var contractName = "main";
+ switch (netId) {
+   case "1":
+     network = "Main Ethereum Network";
+     console.log('This is mainnet')
+     break
+   case "2":
+     network = "Deprecated Morden Network";
+     console.log('This is the deprecated Morden test network.')
+     break
+   case "3":
+     network = "Ropsten Test Network!!";
+     contractName = "ropsten";
+     console.log('This is the ropsten test network.');
+
+     break
+   case "4":
+     network = "Rinkeby Test Network";
+     console.log('This is the Rinkeby test network.')
+     break
+   case "42":
+     network = "Kovan Test Network";
+     console.log('This is the Kovan test network.')
+     break
+   default:
+     console.log('This is an unknown network.')
+ }
+ $.getScript("contracts/ropsten.js"), function() {
+   console.log("Loaded Contract Info");
+ }
+ el_safe('#networkName').innerHTML = network;
+})
+
 const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 
 eth.coinbase().then((result) => {
