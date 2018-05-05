@@ -66,7 +66,7 @@ web3.version.getNetwork((err, netId) => {
      break
    case "3":
      network = "Ropsten Test Network";
-     _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
+     _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE22";
      break
    case "4":
      network = "Rinkeby Test Network";
