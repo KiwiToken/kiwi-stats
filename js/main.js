@@ -436,7 +436,11 @@ function showBlockDistributionPieChart(piechart_dataset, piechart_labels) {
     },
 
     options: {
-      segmentShowStroke : false
+      elements: {
+        arc: {
+            borderWidth: 0
+        }
+      },
       legend: {
         display: false,
       },
