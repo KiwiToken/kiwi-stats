@@ -77,22 +77,22 @@ web3.version.getNetwork((err, netId) => {
  }
  networkId = netId;
  token = eth.contract(tokenABI).at(contract_address);
+
+ eth.coinbase().then((result) => {
+
+   // display connected account
+   el_safe('#coinbaseAccount').innerHTML = result;
+
+   //display Kiwi account owned by connected account
+   token.balanceOf(result).then((balance) => {
+       el_safe('#kiwiCount').innerHTML = (balance.balance / 100000000).toString(10);
+   });
+
+  }).catch((error) => {});
+
  el_safe('#contractAddress').innerHTML = contract_address;
  el_safe('#networkName').innerHTML = network;
 });
-
-
-eth.coinbase().then((result) => {
-
-  // display connected account
-  el_safe('#coinbaseAccount').innerHTML = result;
-
-  //display Kiwi account owned by connected account
-  token.balanceOf(result).then((balance) => {
-      el_safe('#kiwiCount').innerHTML = (balance.balance / 100000000).toString(10);
-  });
-
- }).catch((error) => {});
 
 
 function goToURLAnchor() {
