@@ -436,6 +436,7 @@ function showBlockDistributionPieChart(piechart_dataset, piechart_labels) {
     },
 
     options: {
+      segmentShowStroke : false
       legend: {
         display: false,
       },
