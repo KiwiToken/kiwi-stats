@@ -685,7 +685,7 @@ function loadAllStats() {
 
 function updateAndDisplayAllStats() {
   createStatsTable();
-  loadAllStats();
+  //loadAllStats();
 }
 
 function goToURLAnchor() {
