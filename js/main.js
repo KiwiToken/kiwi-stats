@@ -1,3 +1,11 @@
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
 const version = "v0.0.10";
 var stats_updated_count = 0;
 
@@ -97,6 +105,9 @@ web3.version.getNetwork((err, netId) => {
  el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
 
 })
+
+/* woah hacky boy - this is just to make sure that variables are set before continuting */
+wait(3000);
 
 eth.coinbase().then((result) => {
 
