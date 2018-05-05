@@ -27,7 +27,6 @@ function addToURL(value){
 }
 
 el('#footerversion').innerHTML = version;
-el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
 
 /* colors used by pool names. todo: move to css, still use them for chart.js */
 var pool_colors = {
@@ -82,6 +81,7 @@ web3.version.getNetwork((err, netId) => {
 });
 
 
+el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
 
 
 eth.coinbase().then((result) => {
