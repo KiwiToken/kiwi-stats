@@ -308,6 +308,7 @@ function updateStatsThatHaveDependencies(stats) {
   //difficulty = getValueFromStats('Mining Difficulty', stats)
 
   hashrate = difficulty * 2**22 / 120;
+  console.log("Difficulty: ", difficulty);
   if(difficulty < 1000) {
       hashrate = 1000 * 2**22 / 120;
   }
