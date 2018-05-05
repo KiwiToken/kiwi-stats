@@ -10,6 +10,7 @@ const version = "v0.0.10";
 
 log('KIWI Stats', version);
 el('#footerversion').innerHTML = version;
+el_safe('contractAddress'),innerHTML = _CONTRACT_ADDRESS;
 
 var stats_updated_count = 0;
 /* todo: move these into some kind of contract helper class */
