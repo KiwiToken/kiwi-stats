@@ -8,6 +8,7 @@ var _MAXIMUM_TARGET_STR = "";
 var _MAXIMUM_TARGET_BN = "";
 var _MINIMUM_TARGET = "";
 var _MINIMUM_TARGET_BN = "";
+var token = "";
 
 const _ZERO_BN = new Eth.BN(0, 10);
 
@@ -94,7 +95,7 @@ web3.version.getNetwork((err, netId) => {
  }
  el_safe('#networkName').innerHTML = network;
  el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
- const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
+ token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 })
 
 eth.coinbase().then((result) => {
