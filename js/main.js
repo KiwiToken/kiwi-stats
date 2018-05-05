@@ -625,9 +625,11 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
         + toReadableHashrate(percent_of_total_blocks*estimated_network_hashrate, false) + '</td></tr>';
     });
     /* add the last row (totals) */
+    /*
     innerhtml_buffer += '<tr><td style="border-bottom: 0rem;"></td><td style="border-bottom: 0rem;">'
       + total_block_count + '</td><td style="border-bottom: 0rem;"></td><td style="border-bottom: 0rem;">'
       + toReadableHashrate(estimated_network_hashrate, false) + '</td></tr>';
+      */
     el('#minerstats').innerHTML = innerhtml_buffer;
     log('done populating miner stats');
     // $(window).hide().show(0);
