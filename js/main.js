@@ -50,7 +50,6 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
 web3.version.getNetwork((err, netId) => {
   log("Network: ", netId);
   var network = "unknown network";
-  var contractName = "main";
  switch (netId) {
    case "1":
      network = "Main Ethereum Network";
@@ -62,8 +61,15 @@ web3.version.getNetwork((err, netId) => {
      break
    case "3":
      network = "Ropsten Test Network!!";
-     contractName = "ropsten";
      console.log('This is the ropsten test network.');
+
+     const _BLOCKS_PER_READJUSTMENT = 512;
+     const _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
+     const _MAXIMUM_TARGET_STR = "27606985387162255149739023449108101809804435888681546220650096895197184";  // 2**234
+     const _MAXIMUM_TARGET_BN = new Eth.BN(_MAXIMUM_TARGET_STR, 10);
+     const _MINIMUM_TARGET = 2**16;
+     const _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
+     const _ZERO_BN = new Eth.BN(0, 10);
 
      break
    case "4":
@@ -76,9 +82,6 @@ web3.version.getNetwork((err, netId) => {
      break
    default:
      console.log('This is an unknown network.')
- }
- await $.getScript("contracts/ropsten.js"), function() {
-   console.log("Loaded Contract Info");
  }
  el_safe('#networkName').innerHTML = network;
 })
