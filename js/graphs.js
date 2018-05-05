@@ -1,12 +1,12 @@
 
 /*Helper class for loading historical data from ethereum contract variables.
-  Initialize with an ethjs object, target contract address, and an integer 
+  Initialize with an ethjs object, target contract address, and an integer
   index that points to your desired variable in in the contract's storage area
 
   obj.addValueAtEthBlock(<block number>) starts a request to fetch
   and cache the value of your variable at that time. Note if you pass a
   non-integer block number it will be rounded.
-  
+
   obj.areAllValuesLoaded() will return true once all fetches are complete
 
   obj.getValues returns all requested data
@@ -41,8 +41,8 @@ class contractValueOverTime {
   addValueAtEthBlock(eth_block_num) {
     /* read value from contract @ specific block num, save to this.states
 
-       detail: load eth provider with a request to load value from 
-       block @ num. Callback is anonymous function which pushes the 
+       detail: load eth provider with a request to load value from
+       block @ num. Callback is anonymous function which pushes the
        value onto this.states */
     this.expected_state_length += 1;
     this.sorted = false;
@@ -77,7 +77,7 @@ class contractValueOverTime {
 
       }
     }
-    this.eth.getStorageAt(this.contract_address, 
+    this.eth.getStorageAt(this.contract_address,
                           new Eth.BN(this.storage_index, 10),
                           eth_block_num.toString(10))
     .then(
@@ -107,7 +107,7 @@ class contractValueOverTime {
     this.sorted = true;
   }
   /* iterate through already loaded values. Wherever a state change is
-  seen, queue another value load from the blockchain halfway between 
+  seen, queue another value load from the blockchain halfway between
   state A and state B. Goal is to get closer to the actual eth block
   number where the state transition occurs. */
   increaseTransitionResolution() {
@@ -248,7 +248,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
   }
 
   function getHashrateDataFromDifficultyAndErasPerBlockData(difficulty_data, eras_per_block_data) {
-    var expected_eras_per_block = 1/40; /* should be 40 times slower than ethereum (with 15-second eth blocks) */
+    var expected_eras_per_block = 1/8; /* should be 8 times slower than ethereum (with 15-second eth blocks) */
     var difficulty_data_index = 0;
     var difficulty_change_block_num = 0;
     var chart_data = []
@@ -272,7 +272,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
           && eras_per_block_data[step].x > difficulty_change_block_num
           && eras_per_block_data[step-1].x < difficulty_change_block_num) {
 
-        /* make a new half-way difficulty that takes the duration of each 
+        /* make a new half-way difficulty that takes the duration of each
            seperate difficulty into accout  */
 
         var step_size_in_eth_blocks = eras_per_block_data[step].x - eras_per_block_data[step-1].x;
@@ -300,7 +300,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
 
 
 
-      var unadjusted_network_hashrate = difficulty * 2**22 / 600;
+      var unadjusted_network_hashrate = difficulty * 2**22 / 120;
 
       var network_hashrate = unadjusted_network_hashrate * (current_eras_per_block/expected_eras_per_block);
 
@@ -317,10 +317,10 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
     return chart_data;
   }
 
-  var difficulty_data = convertValuesToChartData(target_values, 
+  var difficulty_data = convertValuesToChartData(target_values,
                                                  (x)=>{return _MAXIMUM_TARGET_BN.div(x)});
   var era_data = convertValuesToChartData(era_values);
-  var total_supply_data = convertValuesToChartData(tokens_minted_values, 
+  var total_supply_data = convertValuesToChartData(tokens_minted_values,
                                                    (x)=>{return x / 10**8});
   var eras_per_block_data = getErasPerBlockFromEraData(era_values);
 
@@ -448,7 +448,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
 
             /* Note: might have issues here if you dont set dataset label */
             label += data.datasets[tooltipItem.datasetIndex].label
-            
+
             label += " @ Eth block #" + tooltipItem.xLabel;
             label += ' (' + ethBlockNumberToTimestamp(tooltipItem.xLabel) + ') :  ';
 
@@ -536,7 +536,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
 
   /* make another dataset with only first and last points in the array */
   var datasetCopy = [
-    average_reward_time_data.slice(0, 1)[0], 
+    average_reward_time_data.slice(0, 1)[0],
     average_reward_time_data.slice(average_reward_time_data.length-1, average_reward_time_data.length)[0],
   ]
   /* make a copy of each array element so we don't modify 'real' data later */
@@ -605,7 +605,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
 
             /* Note: might have issues here if you dont set dataset label */
             label += data.datasets[tooltipItem.datasetIndex].label
-            
+
             label += " @ Eth block #" + tooltipItem.xLabel;
             label += ' (' + ethBlockNumberToTimestamp(tooltipItem.xLabel) + ') :  ';
 
@@ -688,7 +688,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
   //console.log('search', window.location.)
 
   goToURLAnchor();
-  
+
 }
 
 async function refine_mining_target_values(mining_target_values){
@@ -711,7 +711,7 @@ async function refine_mining_target_values(mining_target_values){
 async function updateDifficultyGraph(eth, num_days, num_search_points){
   /*
   note: this is implementation of diff. in contract:
-      function getMiningDifficulty() public constant returns (uint) 
+      function getMiningDifficulty() public constant returns (uint)
         return _MAXIMUM_TARGET.div(miningTarget);
   */
   var contract_address = '0xB6eD7644C69416d67B522e20bC294A9a9B405B31';
