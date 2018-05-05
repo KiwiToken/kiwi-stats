@@ -306,7 +306,7 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
 
       var network_hashrate = unadjusted_network_hashrate * (current_eras_per_block/expected_eras_per_block);
 
-      console.log('for block', current_eth_block, 'diff', difficulty.toString(), 'uhr', unadjusted_network_hashrate, 'hr', network_hashrate)
+      //console.log('for block', current_eth_block, 'diff', difficulty.toString(), 'uhr', unadjusted_network_hashrate, 'hr', network_hashrate)
 
       chart_data.push({
         x: current_eth_block,
