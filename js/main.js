@@ -60,7 +60,13 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
 
 const token = eth.contract(tokenABI).at(_CONTRACT_ADDRESS);
 
-eth.coinbase().then((result) => { el_safe('#coinbaseAccount').innerHTML = result }).catch((error) => {});
+
+eth.coinbase().then((result) => {
+  el_safe('#coinbaseAccount').innerHTML = result;             // display connected account
+  el_safe('').innerHTML = token.balanceOf(result).div(1e8);   //display Kiwi account owned by connected account
+
+ }).catch((error) => {});
+
 
 function goToURLAnchor() {
   /* kind of a hack, after charts are loaded move to correct anchor. For some
