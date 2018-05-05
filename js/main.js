@@ -1,17 +1,13 @@
-
-function addToURL(value){
-  if (history.pushState) {
-    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + value;
-    window.history.pushState({path:newurl},'',newurl);
-  }
-}
-
 const version = "v0.0.10";
-
-el('#footerversion').innerHTML = version;
 
 var stats_updated_count = 0;
 var netId = 0; // the blockchain network id
+
+/* these globals are written to once the values are loaded, and used by the mining calculator */
+var current_diff_saved = 0;
+var next_diff_saved = 0;
+var saved_current_block_reward = 0;
+
 /* todo: move these into some kind of contract helper class */
 var _BLOCKS_PER_READJUSTMENT = 512;
 var _CONTRACT_ADDRESS = "0x43c6017adBc11D00E35Ec6a6c496071E150dd2CE";
@@ -21,19 +17,21 @@ var _MINIMUM_TARGET = 2**16;
 var _MINIMUM_TARGET_BN = new Eth.BN(_MINIMUM_TARGET);
 var _ZERO_BN = new Eth.BN(0, 10);
 
-el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
 
-/* these globals are written to once the values are loaded, and used by the mining calculator */
-var current_diff_saved = 0;
-var next_diff_saved = 0;
-var saved_current_block_reward = 0;
+function addToURL(value){
+  if (history.pushState) {
+    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + value;
+    window.history.pushState({path:newurl},'',newurl);
+  }
+}
+
+el('#footerversion').innerHTML = version;
+el_safe('#contractAddress').innerHTML = _CONTRACT_ADDRESS;
 
 /* colors used by pool names. todo: move to css, still use them for chart.js */
 var pool_colors = {
   orange      : "#C64500",
-
 /* colors below here are not assigned yet */
-
   purple      : "#4527A0",
   blue        : "#0277BD",
   green       : "#2E7D32",
@@ -47,8 +45,6 @@ var pool_colors = {
   lime        : "#cddc39",
   brown       : "#8d6e63",
   grey        : "#78909c",
-
-
 }
 
 if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !== 'undefined') {
