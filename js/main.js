@@ -53,6 +53,7 @@ web3.version.getNetwork((err, netId) => {
  switch (netId) {
    case "1":
      network = "Main Ethereum Network";
+     contract_address = "0xb6ed7644c69416d67b522e20bc294a9a9b405b31";
      break
    case "2":
      network = "Deprecated Morden Network";
