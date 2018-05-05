@@ -35,18 +35,16 @@ Attributions:
     <link rel="stylesheet" type="text/css" href="css/tipr-corso.css">
 
     <!--<link rel="stylesheet" type="text/css" href="/css/dark_custom.css">-->
-    <title>0xBitcoin Statistics</title>
-    <meta name="descripton" content="Live statistics for 0xBitcoin - the mined bitcoin-like token for Ethereum.">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117165354-1"></script>
-    <script type="text/javascript" src="js/gtag.js"></script>
+    <title>KIWI Statistics</title>
+    <meta name="descripton" content="Live statistics for KIWI - the first official ERC-918 token for Ethereum.">
+
   </head>
   <body>
     <script type="text/javascript">
       var el = function(id){ return document.querySelector(id); };
       /* 'safe' version if el that returns a dummy for non-existent elements */
-      var el_safe = function(id) { 
-        let e = el(id); 
+      var el_safe = function(id) {
+        let e = el(id);
         if (e) {
           return e;
         } else {
@@ -73,13 +71,9 @@ Attributions:
       <div class="row">
         <div class="column">
           <img class="top-logo" alt="0xBitcoin Logo" src="img/0xBTC_Orange-40px.png" height=40 width=40 />
-          <h1>0xBitcoin Token Statistics</h1>
+          <h1>KIWI Token Statistics</h1>
         </div>
-        <!--
-        <div class="column">
-          <h1>Token Statistics</h1>
-        </div>
-        -->
+
       </div>
       <div class="row">
         <div class="column">
@@ -95,14 +89,7 @@ Attributions:
           </ul>
         </div>
       </div>
-      <!--
-      <div class="row">
-        <div class="column"><button type="button" onClick="location.href='#miners'" class="nav-miners">MINERS</button></div>
-        <div class="column"><button type="button" onClick="location.href='#blocks'" class="nav-blocks">BLOCKS</button></div>
-        <div class="column"><button type="button" onClick="location.href='#blockrate'" class="nav-blockrate">INFLATION</button></div>
-        <div class="column"><button type="button" onClick="location.href='#difficulty'" class="nav-difficulty">DIFFICULTY</button></div>
-        <div class="column"><button type="button" onClick="location.href='#hashrate'" class="nav-hashrate">HASHRATE</button></div>
-      </div>-->
+
       <div style="display:none;" id="row-statistics">
         <div class="row">
           <div class="column"><h4 class="add-top-padding-5">Current Contract Status</h4></div>
@@ -110,7 +97,6 @@ Attributions:
         <div class="row">
           <div class="column">
             <table>
-              <!--<thead> <tr> <th> </th> <th> </th> </tr> </thead>-->
               <tbody id="statistics">
                 <tr><td colspan="2">Loading info from the blockchain...</td></tr>
               </tbody>
@@ -128,7 +114,6 @@ Attributions:
           </div>
           <div class="column">
             <table>
-              <!--<thead id="minerstats"> <tr> <th> </th> <th> </th> </tr> </thead>-->
               <tbody id="minerstats">
                 <tr><td colspan="3">Loading info from the blockchain...</td></tr>
               </tbody>
@@ -143,7 +128,6 @@ Attributions:
         <div class="row">
           <div class="column">
             <table>
-              <!--<thead id="minerstats"> <tr> <th> </th> <th> </th> </tr> </thead>-->
               <tbody id="blockstats">
                 <tr><td colspan="3">Loading info from the blockchain...</td></tr>
               </tbody>
@@ -151,32 +135,7 @@ Attributions:
           </div>
         </div>
       </div>
-    
-      <!--
-      <div id="row-miningcalculator">
-        <div class="row">
-          <div class="column"><h4 class="add-top-padding"><a name="miningcalculator"></a>Mining calculator</h4></div>
-        </div>
-        <div class="row">
-          <div class="column">
-            <p>
-              <em>Coming soon! For now, you can use this:</em>
-            </p>
-            <p>
-              <em>tokens per day = 4,320,000  x  hashrate  /  (difficulty  x  2<sup>22</sup>)</em>
-              <br>
-              Note: this does <span style="font-weight:600;">not</span> factor pool fees. Subtract 15% from the final amount.
-            </p>
-            <p>
-              Above is based on the hashrate equation:
-              <br>
-              time to solve a block in seconds = difficulty x 2<sup>22</sup> / hashrate
-            </p>
-          </div>
-        </div>
-      </div>
-    -->
-    
+
       <div style="display:none;" id="row-miningcalculator">
         <div class="row">
           <div class="column"><h4 class="add-top-padding"><a name="miningcalculator"></a>Mining calculator</h4></div>
@@ -226,7 +185,6 @@ Attributions:
               </div>
             </div>
             <div class="column">
-              <!--<label for="poolMiningTable">Pool Mining</label>-->
               <table id="poolMiningTable">
                 <thead>
                   <tr>
@@ -276,19 +234,6 @@ Attributions:
                   → tokens per day $={4320000⋅\hashrate}/{2^22⋅\difficulty}$
                 </blockquote>
               </p>
-              <p>
-                For a more detailed calculator and individual GPU benchmarks, visit:
-              </p>
-              <ul>
-                <li><a href="https://docs.google.com/spreadsheets/d/1lpQufwMHeozyz2X5Xq9MhjLr_hVTkQfzpzXcdFQDRGg/edit#gid=826714715">
-                  0xBTC Mining Calculator
-                </a> by minerjoe78, mikers, and others</li>
-                <!--
-                <li><a href="https://docs.google.com/spreadsheets/d/1lbNjXetgN0_CJP-jOVkVr4pvwn_sivbYjNyaU1KbnwQ/">
-                  0xBitcoin GPU Speed/Benchmarks
-                </a> by the 0xBitcoin community </li>
-                -->
-              </ul>
             </div>
           </div>
         </div>
@@ -321,41 +266,13 @@ Attributions:
         </div>
       </div>
 
-<!--
-      <div class="row">
-        <div class="column"><h4 class="add-top-padding"><a name="blockrate"></a>Minutes per reward</h4></div>
-      </div>
-      <div class="row">
-        <div class="column">
-          <table>
-            <tbody id="blockratestats">
-              <tr><td colspan="3">Loading info from the blockchain...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="column"><h4 class="add-top-padding"><a name="hashrate"></a>Network hashrate over time</h4></div>
-      </div>
-      <div class="row">
-        <div class="column">
-          <table>
-            <tbody id="difficultystats">
-              <tr><td colspan="3">Loading info from the blockchain...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
--->
-
       <div id="row-footer">
         <div class="row add-top-padding add-bottom-padding-5">
           <div class="column">
             Data fetched at:
             <span id="LastUpdatedTime">00:00:00</span>
             <div style="font-size:0.875em;">
-              0xBitcoin Stats
+              KIWI Stats
               <span id="footerversion">
                 v0.0.0
               </span>

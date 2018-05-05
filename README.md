@@ -1,10 +1,10 @@
-# 0xBTC-Stats
-Simple web site to show stats about the 0xBTC ERC-20 token ([link](https://0x1d00ffff.github.io/0xBTC-Stats/))
+# KIWI-Stats
+Simple web site to show stats about the KIWI ERC-918 token ([link](https://thekiwi.info))
 
 
 #### TODO
 
- - use lastDifficultyPeriodStarted to find/iterate over difficulty changes 
+ - use lastDifficultyPeriodStarted to find/iterate over difficulty changes
  - add selectors to change graph window size (30 days, 60 days) and resolution
  - move more of the static html (table header rows etc) from js into .html files
  - add a set of useful links to the footer of the site
@@ -13,7 +13,7 @@ Simple web site to show stats about the 0xBTC ERC-20 token ([link](https://0x1d0
  - ~~modify hexcolor algo to pick a random hue, leaving saturation/value constant~~
  - ~~colorize the miner names in the 'block distribution' table~~
  - ~~add human-readable dates next to the eth block numbers in stats~~
- - ~~improve hashrate graph accuracy: currently, we load a set of time 'windows' 
+ - ~~improve hashrate graph accuracy: currently, we load a set of time 'windows'
    and calcualte hashrate for each window, using the difficulty value set at the
    *end* of the window. A better technique: if window is over blocks 1-300 and
    diffuculty changes at block 100, 1/3 are at low diff and 2/3 at high diff.~~
@@ -78,22 +78,22 @@ how to figure out what values are located where:
     for (var i=0; i<15; i++){
         var hex_str = (await eth.getStorageAt('0xB6eD7644C69416d67B522e20bC294A9a9B405B31', i, 5280486)).toString();
         hex_str = hex_str.substr(2, 64);
-        
+
         console.log(i, hex_str);
         console.log('    u256(int):', new Eth.BN(hex_str, 16).toString(10));
         console.log('    u128[0](int):', new Eth.BN(hex_str.substr(0,32), 16).toString(10));
         console.log('    u128[1](int):', new Eth.BN(hex_str.substr(32,64), 16).toString(10));
-        try { 
+        try {
             console.log('    u256(str):', hex2a(hex_str));
             } catch(err) {
                 console.log('    u256(str): bad');
             }
-        try { 
+        try {
             console.log('    u128[0](str):', hex2a(hex_str.substr(0,32)));
             } catch(err) {
                 console.log('    u128[0](str): bad');
             }
-        try { 
+        try {
             console.log('    u128[1](str):', hex2a(hex_str.substr(32,64)));
             } catch(err) {
                 console.log('    u128[1](str): bad');
@@ -124,4 +124,3 @@ aparrel: ion-ios-shirt-outline
 contract: ion-ios-paper-outline
 
 reddit: ion-logo-reddit
-
