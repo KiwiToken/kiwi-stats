@@ -7,6 +7,7 @@ var netId = 0; // the blockchain network id
 var current_diff_saved = 0;
 var next_diff_saved = 0;
 var saved_current_block_reward = 0;
+var latest_eth_block = null;
 
 /* todo: move these into some kind of contract helper class */
 var _BLOCKS_PER_READJUSTMENT = 512;
@@ -84,45 +85,45 @@ web3.version.getNetwork((err, netId) => {
 
  el_safe('#contractAddress').innerHTML = contract_address;
  el_safe('#networkName').innerHTML = network;
+
+ /* move fetching/storing stats into a class, even just to wrap it */
+ stats = [
+   /*Description                     promise which retuns, or null         units         multiplier  null: filled in later*/
+   //['',                              null,                                 "",           1,          null     ], /* mining difficulty */
+   ['Mining Difficulty',             token.getMiningDifficulty,            "",           1,          null     ], /* mining difficulty */
+   ['Estimated Hashrate',            null,                                 "Mh/s",       1,          null     ], /* mining difficulty */
+   ['Rewards Until Readjustment',    null,                                 "",           1,          null     ], /* mining difficulty */
+   ['Current Average Reward Time',   null,                                 "minutes",    1,          null     ], /* mining difficulty */
+   ['Last Difficulty Start Block',   token.latestDifficultyPeriodStarted,  "",           1,          null     ], /* mining difficulty */
+   ['Tokens Minted',                 token.tokensMinted,                   "0xBTC",      0.00000001, null     ], /* supply */
+   ['Max Supply for Current Era',    token.maxSupplyForEra,                "0xBTC",      0.00000001, null     ], /* mining */
+   ['Supply Remaining in Era',       null,                                 "0xBTC",      0.00000001, null     ], /* mining */
+   ['Last Eth Reward Block',         token.lastRewardEthBlockNumber,       "",           1,          null     ], /* mining */
+   ['Last Eth Block',                eth.blockNumber,                      "",           1,          null     ], /* mining */
+   ['Current Reward Era',            token.rewardEra,                      "/ 39",       1,          null     ], /* mining */
+   ['Current Mining Reward',         token.getMiningReward,                "0xBTC",      0.00000001, null     ], /* mining */
+   ['Epoch Count',                   token.epochCount,                     "",           1,          null     ], /* mining */
+   ['Total Supply',                  token.totalSupply,                    "0xBTC",      0.00000001, null     ], /* supply */
+   //['Mining Target',                 token.miningTarget,                   "",           1,          null     ], /* mining */
+   ];
+
+   if(netId == 1){
+     stats.concat(
+     ['',                              null,                                 "",           1,          null     ], /* */
+     ['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
+     ['Token Transfers',               null,                                 "transfers",  1,          null     ], /* usage */
+     ['Total Contract Operations',     null,                                 "txs",        1,          null     ], /* usage */
+   );
+   }
+
 });
 
 
-
-
-/* move fetching/storing stats into a class, even just to wrap it */
-stats = [
-  /*Description                     promise which retuns, or null         units         multiplier  null: filled in later*/
-  //['',                              null,                                 "",           1,          null     ], /* mining difficulty */
-  ['Mining Difficulty',             token.getMiningDifficulty,            "",           1,          null     ], /* mining difficulty */
-  ['Estimated Hashrate',            null,                                 "Mh/s",       1,          null     ], /* mining difficulty */
-  ['Rewards Until Readjustment',    null,                                 "",           1,          null     ], /* mining difficulty */
-  ['Current Average Reward Time',   null,                                 "minutes",    1,          null     ], /* mining difficulty */
-  ['Last Difficulty Start Block',   token.latestDifficultyPeriodStarted,  "",           1,          null     ], /* mining difficulty */
-  ['Tokens Minted',                 token.tokensMinted,                   "0xBTC",      0.00000001, null     ], /* supply */
-  ['Max Supply for Current Era',    token.maxSupplyForEra,                "0xBTC",      0.00000001, null     ], /* mining */
-  ['Supply Remaining in Era',       null,                                 "0xBTC",      0.00000001, null     ], /* mining */
-  ['Last Eth Reward Block',         token.lastRewardEthBlockNumber,       "",           1,          null     ], /* mining */
-  ['Last Eth Block',                eth.blockNumber,                      "",           1,          null     ], /* mining */
-  ['Current Reward Era',            token.rewardEra,                      "/ 39",       1,          null     ], /* mining */
-  ['Current Mining Reward',         token.getMiningReward,                "0xBTC",      0.00000001, null     ], /* mining */
-  ['Epoch Count',                   token.epochCount,                     "",           1,          null     ], /* mining */
-  ['Total Supply',                  token.totalSupply,                    "0xBTC",      0.00000001, null     ], /* supply */
-  //['Mining Target',                 token.miningTarget,                   "",           1,          null     ], /* mining */
-  ];
-
-  if(netId == 1){
-    stats.concat(
-    ['',                              null,                                 "",           1,          null     ], /* */
-    ['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
-    ['Token Transfers',               null,                                 "transfers",  1,          null     ], /* usage */
-    ['Total Contract Operations',     null,                                 "txs",        1,          null     ], /* usage */
-  );
-  }
-
-var latest_eth_block = null;
 eth.blockNumber().then((value)=>{
   latest_eth_block = parseInt(value.toString(10), 10);
 });
+
+
 function ethBlockNumberToDateStr(eth_block) {
   //log('converting', eth_block)
   //log('latest e', latest_eth_block)
@@ -130,6 +131,7 @@ function ethBlockNumberToDateStr(eth_block) {
   /* blockDate = new Date(web3.eth.get bBlock(startBlock-i+1).timestamp*1000); */
   return new Date(Date.now() - ((latest_eth_block - eth_block)*15*1000)).toLocaleDateString()
 }
+
 function ethBlockNumberToTimestamp(eth_block) {
   //log('converting', eth_block)
   //log('latest e', latest_eth_block)
@@ -137,8 +139,6 @@ function ethBlockNumberToTimestamp(eth_block) {
   /* blockDate = new Date(web3.eth.getBlock(startBlock-i+1).timestamp*1000); */
   return new Date(Date.now() - ((latest_eth_block - eth_block)*15*1000)).toLocaleString()
 }
-
-
 
 function secondsToReadableTime(seconds) {
   if(seconds <= 0) {
