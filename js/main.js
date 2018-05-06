@@ -327,13 +327,13 @@ function updateLastUpdatedTime() {
 
 function updateThirdPartyAPIs() {
   /* ethplorer token info */
-  $.getJSON('https://api.ethplorer.io/getTokenInfo/0xb6ed7644c69416d67b522e20bc294a9a9b405b31?apiKey=freekey',
+  $.getJSON('https://api.ethplorer.io/getTokenInfo/0x2BF91c18Cd4AE9C2f2858ef9FE518180F7B5096D?apiKey=freekey',
     function(data) {
       el('#TokenHolders').innerHTML = "<b>" + data["holdersCount"] + "</b> holders";
       el('#TokenTransfers').innerHTML = "<b>" + data["transfersCount"] + "</b> transfers";
   });
   /* ethplorer contract address info */
-  $.getJSON('https://api.ethplorer.io/getAddressInfo/0xb6ed7644c69416d67b522e20bc294a9a9b405b31?apiKey=freekey',
+  $.getJSON('https://api.ethplorer.io/getAddressInfo/0x2BF91c18Cd4AE9C2f2858ef9FE518180F7B5096D?apiKey=freekey',
     function(data) {
       el('#TotalContractOperations').innerHTML = "<b>" + data["countTxs"] + "</b> txs";
   });
@@ -435,7 +435,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
   eth.getLogs({
     fromBlock: last_reward_eth_block - num_eth_blocks_to_search,
     toBlock: last_reward_eth_block,
-    address: '0x43c6017adbc11d00e35ec6a6c496071e150dd2ce',
+    address: '0x2bf91c18cd4ae9c2f2858ef9fe518180f7b5096d',
     topics: ['0xcf6fbb9dcea7d07263ab4f5c3a92f53af33dffc421d9d121e1c74b307e68189d', null],
   })
   .then((result) => {
