@@ -44,6 +44,7 @@ var pool_colors = {
 if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !== 'undefined') {
    var eth = new Eth(window.web3.currentProvider);
 } else {
+  //@todo - how do we support test and main net if here?
    var eth = new Eth(new Eth.HttpProvider("https://ropsten.infura.io/MnFOXCPE2oOhWpOCyEBT"));
    log("warning: no web3 provider found, using infura.io as backup provider")
 }
@@ -53,7 +54,7 @@ web3.version.getNetwork((err, netId) => {
  switch (netId) {
    case "1":
      network = "Main Ethereum Network";
-     contract_address = "0xb6ed7644c69416d67b522e20bc294a9a9b405b31";
+     contract_address = "0x2BF91c18Cd4AE9C2f2858ef9FE518180F7B5096D";
      break
    case "2":
      network = "Deprecated Morden Network";
