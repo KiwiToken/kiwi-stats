@@ -335,14 +335,14 @@ Attributions:
           updateAndDisplayAllStats();
         }else if(searchParams.get('page') == 'miningcalculator') {
           log('MININGCALCULATOR selected');
-          $(document).attr("title", "Mining Calculator - 0xBitcoin Statistics");
+          $(document).attr("title", "Mining Calculator - KIWI Statistics");
           $("#row-miningcalculator").show();
           loadAllStats();
         }else if(searchParams.get('page') == 'graphs') {
           log('GRAPHS selected');
           let days = 60;
           let points = 60;
-          $(document).attr("title", "Graphs - 0xBitcoin Statistics");
+          $(document).attr("title", "Graphs - KIWI Statistics");
           if(searchParams.get('days')) {
             days = searchParams.get('days');
           }

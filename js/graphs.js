@@ -716,7 +716,7 @@ async function updateDifficultyGraph(eth, num_days, num_search_points){
       function getMiningDifficulty() public constant returns (uint)
         return _MAXIMUM_TARGET.div(miningTarget);
   */
-  var contract_address = '0xB6eD7644C69416d67B522e20bC294A9a9B405B31';
+  var contract_address = '0x2BF91c18Cd4AE9C2f2858ef9FE518180F7B5096D';
   var max_blocks = num_days*24*60*(60/15);
   var initial_search_points = num_search_points; /* in some crazy world where readjustments happen every day, this will catch all changes */
   var previous = 0;
