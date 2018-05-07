@@ -113,6 +113,7 @@ web3.version.getNetwork((err, netId) => {
    ];
 
    if(networkId == 1){
+     console.log("more stats");
      stats.concat(
      ['',                              null,                                 "",           1,          null     ], /* */
      ['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
@@ -122,7 +123,7 @@ web3.version.getNetwork((err, netId) => {
    }
 
 });
-
+console.log(stats);
 
 eth.blockNumber().then((value)=>{
   latest_eth_block = parseInt(value.toString(10), 10);
