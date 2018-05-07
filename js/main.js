@@ -45,7 +45,7 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
    var eth = new Eth(window.web3.currentProvider);
 } else {
   //@todo - how do we support test and main net if here?
-   var eth = new Eth(new Eth.HttpProvider("https://ropsten.infura.io/MnFOXCPE2oOhWpOCyEBT"));
+   var eth = new Eth(new Eth.HttpProvider("https://mainnet.infura.io/MnFOXCPE2oOhWpOCyEBT"));
    log("warning: no web3 provider found, using infura.io as backup provider")
 }
 
