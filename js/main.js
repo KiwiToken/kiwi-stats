@@ -91,6 +91,7 @@ web3.version.getNetwork((err, netId) => {
  el_safe('#networkName').innerHTML = network;
 
  /* move fetching/storing stats into a class, even just to wrap it */
+ console.log("network id: ", networkId);
  stats = [
    /*Description                     promise which retuns, or null         units         multiplier  null: filled in later*/
    //['',                              null,                                 "",           1,          null     ], /* mining difficulty */
