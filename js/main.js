@@ -40,7 +40,8 @@ var pool_colors = {
   brown       : "#8d6e63",
   grey        : "#78909c",
 }
-
+var eth = new Eth(new Eth.HttpProvider("https://mainnet.infura.io/MnFOXCPE2oOhWpOCyEBT"));
+/*
 if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !== 'undefined') {
    var eth = new Eth(window.web3.currentProvider);
 } else {
@@ -48,6 +49,7 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
    var eth = new Eth(new Eth.HttpProvider("https://mainnet.infura.io/MnFOXCPE2oOhWpOCyEBT"));
    log("warning: no web3 provider found, using infura.io as backup provider")
 }
+*/
 
 web3.version.getNetwork((err, netId) => {
   var network = "Unknown Network";
