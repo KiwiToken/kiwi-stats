@@ -2,7 +2,7 @@ const version = "v0.0.10";
 
 var stats = [];
 var stats_updated_count = 0;
-var netId = 0; // the blockchain network id
+var networkId = 0; // the blockchain network id
 
 /* these globals are written to once the values are loaded, and used by the mining calculator */
 var current_diff_saved = 0;
@@ -111,7 +111,7 @@ web3.version.getNetwork((err, netId) => {
    //['Mining Target',                 token.miningTarget,                   "",           1,          null     ], /* mining */
    ];
 
-   if(netId == 1){
+   if(networkId == 1){
      stats.concat(
      ['',                              null,                                 "",           1,          null     ], /* */
      ['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
