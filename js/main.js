@@ -120,10 +120,14 @@ web3.version.getNetwork((err, netId) => {
      ['Token Transfers',               null,                                 "transfers",  1,          null     ], /* usage */
      ['Total Contract Operations',     null,                                 "txs",        1,          null     ], /* usage */
    );
+
+console.log("concat");
+console.log(stats);
+
    }
 
 });
-console.log(stats);
+
 
 eth.blockNumber().then((value)=>{
   latest_eth_block = parseInt(value.toString(10), 10);
