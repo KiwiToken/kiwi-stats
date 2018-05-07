@@ -110,9 +110,9 @@ web3.version.getNetwork((err, netId) => {
    ['Epoch Count',                   token.epochCount,                     "",           1,          null     ], /* mining */
    ['Total Supply',                  token.totalSupply,                    "KIWI",      0.00000001, null     ], /* supply */
    //['Mining Target',                 token.miningTarget,                   "",           1,          null     ], /* mining */
-   ['',                              null,                                 "",           1,          null     ], /* */
-   ['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
-   ['Token Transfers',               null,                                 "transfers",  1,          null     ], /* usage */
+   //['',                              null,                                 "",           1,          null     ], /* */
+   //['Token Holders',                 null,                                 "holders",    1,          null     ], /* usage */
+   //['Token Transfers',               null,                                 "transfers",  1,          null     ], /* usage */
    ['Total Contract Operations',     null,                                 "txs",        1,          null     ], /* usage */
    ];
 
