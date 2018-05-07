@@ -116,12 +116,6 @@ web3.version.getNetwork((err, netId) => {
    ['Total Contract Operations',     null,                                 "txs",        1,          null     ], /* usage */
    ];
 
-
-console.log("concat");
-console.log(stats);
-
-   }
-
 });
 
 
