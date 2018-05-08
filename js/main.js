@@ -41,9 +41,10 @@ var pool_colors = {
   grey        : "#78909c",
 }
 //var eth = new Eth(new Eth.HttpProvider("https://mainnet.infura.io/MnFOXCPE2oOhWpOCyEBT"));
-
+var showHeaderInfo = false;
 if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !== 'undefined') {
    var eth = new Eth(window.web3.currentProvider);
+   showHeaderInfo = false;
 } else {
   //@todo - how do we support test and main net if here?
    var eth = new Eth(new Eth.HttpProvider("https://mainnet.infura.io/MnFOXCPE2oOhWpOCyEBT"));
