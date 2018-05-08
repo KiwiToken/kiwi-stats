@@ -51,7 +51,7 @@ if (typeof window.web3 !== 'undefined' && typeof window.web3.currentProvider !==
    log("warning: no web3 provider found, using infura.io as backup provider")
 }
 
-web3.version.getNetwork((err, netId) => {
+eth.version.getNetwork((err, netId) => {
   var network = "Unknown Network";
  switch (netId) {
    case "1":
