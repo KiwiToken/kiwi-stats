@@ -568,11 +568,8 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
               return parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10);
             }
           });
-        } else {
-          return '~';
-        }
 
-      return '~';
+      return '~~';
     }
 
     /* fill in block info */
