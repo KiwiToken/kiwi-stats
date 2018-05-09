@@ -560,7 +560,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
       return new Date(date_of_last_mint.getTime() - ((last_reward_eth_block - eth_block)*15*1000)).toLocaleString()
     }
 
-    function gas_gas_price_from_transaction(tx) {
+    function gas_gas_price_from_transaction(tx_hash) {
 
       if(web3) {
           web3.eth.getTransaction(tx_hash, function(e, r){
