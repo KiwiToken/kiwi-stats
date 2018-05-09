@@ -586,13 +586,11 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
         if(web3) {
           web3.eth.getTransaction(tx_hash, function(e, r){
             if(!e) {
-              parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10);
-            } else {
-              '~'
+              + parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10);
             }
           });
         } else {
-
+          + '~'
         }
 
         + '</td>'
