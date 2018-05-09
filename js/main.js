@@ -590,7 +590,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
             } else {
               console.error(e);
             }
-          }
+          });
         }
 
         + '</td>'
