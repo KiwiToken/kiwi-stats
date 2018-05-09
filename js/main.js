@@ -581,8 +581,8 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
         + '<a href="' + block_url + '">' + eth_block + '</td><td>'
         + '<a href="' + transaction_url + '" title="' + tx_hash + '">'
         + tx_hash.substr(0, 16) + '...</a></td>'
-        + '<td>'
-
+        + '<td>aa</td>'
+/*
         if(web3) {
           web3.eth.getTransaction(tx_hash, function(e, r){
             if(!e) {
@@ -592,7 +592,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
         } else {
           + '~'
         }
-
+*/
         + '</td>'
         + '<td align="right" style="text-overflow:ellipsis;white-space: nowrap;overflow: hidden;">'
         + miner_name_link + '</td></tr>';
