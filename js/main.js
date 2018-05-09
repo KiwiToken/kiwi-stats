@@ -270,7 +270,7 @@ function updateStatsThatHaveDependencies(stats) {
   el_safe('#SupplyRemaininginEra').innerHTML = "<b>" + supply_remaining_in_era.toLocaleString() + "</b> KIWI <span style='font-size:0.8em;'>(" + rewards_blocks_remaining_in_era + " blocks)</span>";
 
   /* time until next epoch ('halvening') */
-  el_safe('#CurrentRewardEra').innerHTML += " <span style='font-size:0.8em;'>(next era: ~" + secondsToReadableTime(rewards_blocks_remaining_in_era * 600) + ")</div>";
+  el_safe('#CurrentRewardEra').innerHTML += " <span style='font-size:0.8em;'>(next era: ~" + secondsToReadableTime(rewards_blocks_remaining_in_era * 120) + ")</div>";
 
   /* rewards until next readjustment */
   epoch_count = getValueFromStats('Epoch Count', stats)
@@ -560,12 +560,12 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
       return new Date(date_of_last_mint.getTime() - ((last_reward_eth_block - eth_block)*15*1000)).toLocaleString()
     }
 
-    function gas_gas_price_from_transaction(tx_hash) {
+    function get_gas_price_from_transaction(tx_hash) {
 
       if(web3) {
           web3.eth.getTransaction(tx_hash, function(e, r){
             if(!e) {
-              console.log(r);
+              console.log(parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10));
               return parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10);
             };
           });
@@ -592,7 +592,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
         + '<a href="' + block_url + '">' + eth_block + '</td><td>'
         + '<a href="' + transaction_url + '" title="' + tx_hash + '">'
         + tx_hash.substr(0, 16) + '...</a></td>'
-        + '<td>' + gas_gas_price_from_transaction(tx_hash) + '</td>'
+        + '<td>' + get_gas_price_from_transaction(tx_hash) + '</td>'
         + '<td align="right" style="text-overflow:ellipsis;white-space: nowrap;overflow: hidden;">'
         + miner_name_link + '</td></tr>';
         //+ '</a></td></tr>';
