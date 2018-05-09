@@ -563,7 +563,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
     /* fill in block info */
     var dt = new Date();
     var innerhtml_buffer = '<tr><th>Time (Approx)</th><th>Eth Block #</th>'
-      + '<th>Transaction Hash</th><th>Miner</th></tr>';
+      + '<th>Transaction Hash</th><th>Gas Price (Gwei)<th>Miner</th></tr>';
     mined_blocks.forEach(function(block_info) {
       var eth_block = parseInt(block_info[0]);
       var tx_hash = block_info[1];
@@ -580,7 +580,19 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
         + get_date_from_eth_block(eth_block) + '</td><td>'
         + '<a href="' + block_url + '">' + eth_block + '</td><td>'
         + '<a href="' + transaction_url + '" title="' + tx_hash + '">'
-        + tx_hash.substr(0, 16) + '...</a></td><td align="right" style="text-overflow:ellipsis;white-space: nowrap;overflow: hidden;">'
+        + tx_hash.substr(0, 16) + '...</a></td>'
+        + '<td>'
+
+        if(web3) {
+          web3.eth.getTransaction(tx_hash, function(e, r){if(!e) {
+            console.log(parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10));
+          else {
+            console.error(e);})
+          }
+        }
+
+        + '</td>'
+        + '<td align="right" style="text-overflow:ellipsis;white-space: nowrap;overflow: hidden;">'
         + miner_name_link + '</td></tr>';
         //+ '</a></td></tr>';
     });
