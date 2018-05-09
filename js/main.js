@@ -568,10 +568,8 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
               return parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10);
             };
           });
-
-      return '~~';
-    }
-  }
+        }
+      }
     /* fill in block info */
     var dt = new Date();
     var innerhtml_buffer = '<tr><th>Time (Approx)</th><th>Eth Block #</th>'
