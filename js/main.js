@@ -300,7 +300,8 @@ function updateStatsThatHaveDependencies(stats) {
   var new_mining_target = calculateNewMiningDifficulty(difficulty,
                                                        eth_blocks_since_last_difficulty_period,
                                                        rewards_since_readjustment);
-  el_safe('#MiningDifficulty').innerHTML += "  <span style='font-size:0.8em;'>(next: ~" + new_mining_target.toLocaleString() + ")</span>";
+  el_safe('#MiningDifficulty').innerHTML = difficulty;
+  //el_safe('#MiningDifficulty').innerHTML += "  <span style='font-size:0.8em;'>(next: ~" + new_mining_target.toLocaleString() + ")</span>";
   if(mining_calculator_app) {
     mining_calculator_app.setNextDifficulty(new_mining_target);
   }
