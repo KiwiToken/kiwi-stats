@@ -593,7 +593,8 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
         + '<a href="' + block_url + '">' + eth_block + '</td><td>'
         + '<a href="' + transaction_url + '" title="' + tx_hash + '">'
         + tx_hash.substr(0, 16) + '...</a></td>'
-        + '<td id="tx'+ tx_hash + '">' + get_gas_price_from_transaction(tx_hash) + '</td>'
+        //+ '<td id="tx'+ tx_hash + '">' + get_gas_price_from_transaction(tx_hash) + '</td>'
+        + '<td></td>'
         + '<td align="right" style="text-overflow:ellipsis;white-space: nowrap;overflow: hidden;">'
         + miner_name_link + '</td></tr>';
         //+ '</a></td></tr>';
