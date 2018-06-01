@@ -563,13 +563,15 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
 
     function get_gas_price_from_transaction(tx_hash) {
 
-      //if(typeof(web3) !== 'undefined') {
-          eth.eth.getTransaction(tx_hash, function(e, r){
+      if(typeof(web3) !== 'undefined') {
+          web3.eth.getTransaction(tx_hash, function(e, r){
             if(!e) {
-              el_safe('#tx' + tx_hash).innerHTML = parseInt(eth.fromWei(r.gasPrice, 'Gwei'),10);
+              el_safe('#tx' + tx_hash).innerHTML = parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10);
             };
           });
-
+        } else {
+          el_safe('#tx' + tx_hash).innerHTML = "~";
+        }
       }
 
     /* fill in block info */
