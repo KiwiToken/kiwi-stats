@@ -569,6 +569,8 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
               el_safe('#tx' + tx_hash).innerHTML = parseInt(web3.fromWei(r.gasPrice, 'Gwei'),10);
             };
           });
+        } else {
+          el_safe('#tx' + tx_hash).innerHTML = "~";
         }
       }
 
