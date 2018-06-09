@@ -8,7 +8,7 @@ mining_calculator_app = new Vue({
     mint_failure_rate: '3',
     current_difficulty: '0',
     next_difficulty: '0',
-    block_reward: '0',
+    block_reward: '5000',
   },
   computed: {
     calculatedTokensPerDay: function () {
@@ -72,7 +72,8 @@ mining_calculator_app = new Vue({
     },
 
     setBlockReward: function (block_reward) {
-      this.block_reward = block_reward;
+      //this.block_reward = block_reward;
+      this.block_reward = 5000;
     },
 
     setDifficulty: function (difficulty) {
