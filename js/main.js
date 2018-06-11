@@ -402,11 +402,17 @@ function getMinerNameLinkHTML(address, known_miners) {
   var hexcolor = getMinerColor(address, known_miners);
   var poolstyle = '<span style="background-color: ' + hexcolor + ';" class="poolname">';
 
-  if(known_miners[address] !== undefined) {
-    console.log(known_miners[address]);
-    var readable_name = known_miners[address][0];
-    var address_url = known_miners[address][1];
+  //console.log(address);
+  //console.log(known_miners[address]);
+  //console.log(known_miners['0x0546c90c9092D0A8f982c59766D2963b171F5D44'][0]);
+
+  //if(known_miners[address] !== undefined) {
+  if (address == 0x0546c90c9092D0A8f982c59766D2963b171F5D44) {
+    console.log("Adam");
+    var readable_name = known_miners["0x0546c90c9092D0A8f982c59766D2963b171F5D44"][0];
+    var address_url = known_miners["0x0546c90c9092D0A8f982c59766D2963b171F5D44"][1];
   } else {
+    //console.log(address);
     var readable_name = address.substr(0, 14) + '...';
     var address_url = 'https://etherscan.io/address/' + address;
   }
@@ -418,7 +424,8 @@ function getMinerNameLinkHTML(address, known_miners) {
 function updateAllMinerInfo(eth, stats, hours_into_past){
 
   var known_miners = {
-    "0x0546c90c9092D0A8f982c59766D2963b171F5D44" : [ "Adam @ The KIWI", "http://thekiwi.online",     pool_colors.green ],
+    "0x0546c90c9092D0A8f982c59766D2963b171F5D44" : [ "Adam (The KIWI)", "http://thekiwi.online",     pool_colors.purple ],
+    "0xf3243babf74ead828ac656877137df705868fd66" : [ "Token Mining Pool", "http://TokenMiningPool.com",     pool_colors.orange ],
   }
 
   var last_reward_eth_block = getValueFromStats('Last Eth Reward Block', stats)
