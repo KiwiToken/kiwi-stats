@@ -417,7 +417,7 @@ function getMinerNameLinkHTML(address, known_miners) {
 function updateAllMinerInfo(eth, stats, hours_into_past){
 
   var known_miners = {
-    "0xe984a8783ddff96b87c377b1191cc6b45a8fdc27" : [ "KIWI Mining Pool", "http://thekiwi.io",     pool_colors.orange ],
+    "0x0546c90c9092D0A8f982c59766D2963b171F5D44" : [ "Adam @ The KIWI", "http://thekiwi.online",     pool_colors.green ],
   }
 
   var last_reward_eth_block = getValueFromStats('Last Eth Reward Block', stats)
