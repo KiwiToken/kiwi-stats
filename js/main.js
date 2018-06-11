@@ -403,6 +403,7 @@ function getMinerNameLinkHTML(address, known_miners) {
   var poolstyle = '<span style="background-color: ' + hexcolor + ';" class="poolname">';
 
   if(known_miners[address] !== undefined) {
+    console.log(known_miners[address]);
     var readable_name = known_miners[address][0];
     var address_url = known_miners[address][1];
   } else {
