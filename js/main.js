@@ -407,8 +407,8 @@ function getMinerNameLinkHTML(address, known_miners) {
   //console.log(known_miners['0x0546c90c9092D0A8f982c59766D2963b171F5D44'][0]);
 
   //if(known_miners[address] !== undefined) {
-  if (address == 0x0546c90c9092D0A8f982c59766D2963b171F5D44) {
-    console.log("Adam");
+  if (address == 0x0546c90c9092D0A8f982c59766D2963b171F5D44FAKE) {
+    //console.log("Adam");
     var readable_name = known_miners["0x0546c90c9092D0A8f982c59766D2963b171F5D44"][0];
     var address_url = known_miners["0x0546c90c9092D0A8f982c59766D2963b171F5D44"][1];
   } else {
