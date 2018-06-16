@@ -544,9 +544,9 @@ function generateDifficultyGraph(eth, target_cv_obj, era_cv_obj, tokens_minted_c
   /* make a copy of each array element so we don't modify 'real' data later */
   datasetCopy[0] = Object.assign({}, datasetCopy[0]);
   datasetCopy[1] = Object.assign({}, datasetCopy[1]);
-  /* set y-values to 2-minutes */
-  datasetCopy[0].y = 2;
-  datasetCopy[1].y = 2;
+  /* set y-values to 3-minutes */
+  datasetCopy[0].y = 3;
+  datasetCopy[1].y = 3;
   //console.log('datasetCopy', datasetCopy);
 
   /* block time chart */
