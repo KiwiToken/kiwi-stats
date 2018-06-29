@@ -419,6 +419,7 @@ function updateAllMinerInfo(eth, stats, hours_into_past){
   var known_miners = {
     "0x0546c90c9092D0A8f982c59766D2963b171F5D44" : [ "Adam (The KIWI)", "http://thekiwi.online",     pool_colors.purple ],
     "0xdad9518386543693cf61954993732a87a15c3a93" : [ "Wolf Pool", "http://kiwi.wolfpool.io",     pool_colors.blue ],
+    "0x3b10fa943c7b43641c184e21732c37b9bc8a6e16" : [ "KIWI Private Pool", "http://thekiwi.onlin", pool_colors.green]
   }
 
   var last_reward_eth_block = getValueFromStats('Last Eth Reward Block', stats)
